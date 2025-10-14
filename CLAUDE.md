@@ -2,6 +2,43 @@
 
 This directory contains the nix-darwin configuration for managing macOS system settings.
 
+## Initial Setup (New System)
+
+### Option 1: Remote Install (One-Liner)
+```bash
+# Backup existing shell configs (if they exist)
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin 2>/dev/null || true
+sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin 2>/dev/null || true
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
+
+# Bootstrap nix-darwin and apply config from GitHub
+sudo nix run nix-darwin -- switch --flake github:shedali/nix-darwin#personal
+```
+
+### Option 2: Local Install (For Customization)
+```bash
+# Clone the repository
+git clone https://github.com/shedali/nix-darwin.git ~/.config/nix-darwin
+
+# Update the configuration with your username and hostname
+cd ~/.config/nix-darwin
+# Edit flake.nix: change "franz" to your username
+# Edit flake.nix: change "personal" to your hostname
+
+# Backup existing shell configs (if they exist)
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin 2>/dev/null || true
+sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin 2>/dev/null || true
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
+
+# Bootstrap nix-darwin and apply config
+sudo nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+```
+
+### Get Your Current Hostname
+```bash
+scutil --get LocalHostName
+```
+
 ## Quick Reference
 
 ### Apply Configuration Changes
