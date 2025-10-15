@@ -2,7 +2,7 @@
   imports = [ ./shared.nix ];
 
   # Personal Homebrew configuration
-  programs.brew = {
+  homebrew = {
     enable = true;
 
     taps = [

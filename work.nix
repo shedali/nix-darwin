@@ -2,7 +2,7 @@
   imports = [ ./shared.nix ];
 
   # Work Homebrew configuration - minimal set for work
-  programs.brew = {
+  homebrew = {
     enable = true;
 
     brews = [
