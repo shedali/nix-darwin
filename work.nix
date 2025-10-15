@@ -4,6 +4,8 @@
   # Work Homebrew configuration - minimal set for work
   homebrew = {
     enable = true;
+    onActivation.autoUpdate = true;
+    onActivation.cleanup = "zap";
 
     brews = [
       "gh"

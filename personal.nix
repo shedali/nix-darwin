@@ -4,6 +4,8 @@
   # Personal Homebrew configuration
   homebrew = {
     enable = true;
+    onActivation.autoUpdate = true;
+    onActivation.cleanup = "zap";
 
     taps = [
       "alexanderwillner/tap"
