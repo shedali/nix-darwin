@@ -11,7 +11,6 @@
     ];
 
     casks = [
-      "1password"
       "docker"
       "ghostty"
       "google-chrome"
@@ -22,4 +21,11 @@
     masApps = {
     };
   };
+
+  # Override dock settings for work - use Ghostty instead of Terminal
+  system.defaults.dock.persistent-apps = [
+    "/Applications/Ghostty.app"
+    "/Applications/Slack.app"
+    "/Applications/Google Chrome.app"
+  ];
 }
