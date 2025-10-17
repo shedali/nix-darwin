@@ -11,6 +11,7 @@
     ];
 
     casks = [
+      "1password"
       "docker"
       "ghostty"
       "google-chrome"
