@@ -47,7 +47,6 @@
       "ipsw"
       "jondot/tap/hygen"
       "mas"
-      "neovim"
       "oxen-ai/oxen/oxen"
       "python@3.12"
       "render-oss/render/render"
