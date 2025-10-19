@@ -42,6 +42,7 @@
       "dagger/tap/dagger"
       "dash"
       "gh"
+      "home-assistant"
       "httpie"
       "ipsw"
       "jondot/tap/hygen"
