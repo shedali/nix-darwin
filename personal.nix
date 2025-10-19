@@ -62,6 +62,7 @@
       "amethyst"
       "arc"
       "audio-hijack"
+      "balenaetcher"
       "bibdesk"
       "busycontacts"
       "calibre"
