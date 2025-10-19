@@ -15,7 +15,7 @@
   };
 
   # Common packages
-  environment.systemPackages = [ pkgs.vim ];
+  environment.systemPackages = [ pkgs.vim pkgs.neovim ];
 
   # Set Git commit hash for darwin-version
   system.configurationRevision = null;
