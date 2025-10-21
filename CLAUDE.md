@@ -4,9 +4,30 @@ This directory contains the nix-darwin configuration for managing macOS system s
 
 ## Available Profiles
 
-- **personal** - Full app suite for personal machine
-- **work** - Minimal work-focused apps
-- **mini** - Minimal server/utility setup for Mac mini
+### Personal Profile
+Full app suite for personal machine including:
+- **Window Manager:** AeroSpace (auto-starts via launchd)
+- **Development:** Ghostty, Cursor, Visual Studio Code, Docker (via OrbStack)
+- **Productivity:** Alfred, Raycast, 1Password, Obsidian, Things
+- **Media:** Plex, Plexamp, IINA, ScreenFlow
+- **Communication:** Slack, Discord, Telegram, Signal
+- **Utilities:** Hammerspoon, Hazel, Keyboard Maestro, CleanShot
+- Plus many specialized tools and Mac App Store apps
+
+### Work Profile
+Minimal work-focused setup including:
+- **Window Manager:** AeroSpace (auto-starts via launchd)
+- **Core Apps:** Ghostty, Visual Studio Code, Slack, Google Chrome
+- **Tools:** 1Password, Docker
+- **Dock:** Ghostty, Slack, Chrome
+
+### Mini Profile
+Minimal server/utility setup for Mac mini including:
+- **Window Manager:** AeroSpace (auto-starts via launchd)
+- **Core Apps:** Ghostty, 1Password
+- **CLI Tools:** gh, mas
+- **Remote Access:** Tailscale (Mac App Store)
+- **Dock:** Ghostty only
 
 ## Initial Setup (New System)
 
@@ -91,10 +112,41 @@ This system uses Determinate Nix, which has its own daemon. Therefore:
 - Set to `franz` in `system.primaryUser`
 - Required for user-specific settings (dock, finder, screenshots, etc.)
 
+### Homebrew Management
+- Managed via `nix-homebrew` module
+- Configured per profile in `*.nix` files
+- `onActivation.cleanup = "zap"` removes unlisted apps
+  - **Important:** Apps removed from config will be automatically uninstalled
+  - This includes both casks and Mac App Store apps
+  - Zap also removes associated preference files and caches
+
+### Integration with home-manager
+- **nix-darwin**: System-level config, app installation, system settings
+- **home-manager**: User-level config, dotfiles, application configs
+- **AeroSpace config**: `.aerospace.toml` is symlinked by home-manager
+- **Avoid duplication**: Don't install same app in both systems
+  - Example: Install AeroSpace via nix-darwin cask, not home-manager package
+  - Exception: Config files belong in home-manager even if app is in nix-darwin
+
 ### Current Settings
-- **Dock**: autohide disabled, Terminal.app in persistent apps
+- **Dock**: autohide disabled, profile-specific persistent apps
 - **Finder**: path bar and status bar enabled
 - **Screenshots**: saved to `~/Pictures/Screenshots`
+
+### AeroSpace Window Manager
+All profiles include AeroSpace (i3-like tiling window manager):
+- **Installation**: Via Homebrew cask from `nikitabobko/tap`
+- **Auto-start**: Configured via launchd agent (launches on login)
+- **Configuration**: `.aerospace.toml` managed by home-manager
+- **Logs**:
+  - `/tmp/aerospace.out.log` (standard output)
+  - `/tmp/aerospace.err.log` (error output)
+
+To restart AeroSpace after config changes:
+```bash
+# Kill current instance (will auto-restart via launchd)
+killall AeroSpace
+```
 
 ## File Structure
 
@@ -169,6 +221,19 @@ Some settings require:
 System hostname (LocalHostName): `personal`
 This must match the configuration name in `flake.nix`: `darwinConfigurations."personal"`
 
+## Recent Changes
+
+### 2025-10-21
+- Added **AeroSpace** window manager to all three profiles (personal, work, mini)
+  - Installed via Homebrew cask with auto-start via launchd
+  - Configuration managed by home-manager
+- Removed many apps from personal profile (cleanup of unused apps)
+- Created minimal **mini profile** for Mac mini
+  - Only: 1Password, Ghostty, AeroSpace, Tailscale, gh, mas
+- Removed Raycast from mini profile (not needed for headless use)
+- Created **bootstrap script** for automated setup
+- Updated documentation with current profile states
+
 ## Mac Mini Setup
 
 One-command setup for Mac mini with the `mini` profile:
@@ -183,6 +248,8 @@ This single command automatically:
 - Installs and configures nix-darwin with the mini profile
 
 The mini profile includes:
-- **Casks:** 1Password, Ghostty, Raycast
-- **Brews:** gh, mas
-- **Mac App Store:** Tailscale
+- **Window Manager:** AeroSpace (with auto-start)
+- **GUI Apps:** 1Password, Ghostty
+- **CLI Tools:** gh (GitHub CLI), mas (Mac App Store CLI)
+- **Remote Access:** Tailscale (Mac App Store)
+- **Dock:** Only Ghostty
