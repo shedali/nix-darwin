@@ -54,7 +54,7 @@
       "airfoil"
       "alacritty"
       "alfred"
-      "amethyst"
+      "nikitabobko/tap/aerospace"
       "arc"
       "audio-hijack"
       "balenaetcher"
