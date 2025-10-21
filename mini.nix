@@ -15,7 +15,6 @@
     casks = [
       "1password"
       "ghostty"
-      "raycast"
     ];
 
     masApps = {
