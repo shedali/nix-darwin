@@ -151,7 +151,6 @@
       "Cardhop" = 1290358394;
       "ColorSlurp" = 1287239339;
       "Comic Life 3" = 688953417;
-      "Compressor" = 424390742;
       "DaisyDisk" = 411643860;
       "Day One" = 1055511498;
       "djay Pro" = 450527929;
