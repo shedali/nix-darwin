@@ -25,4 +25,16 @@
 
   # Platform
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # Post-activation script
+  system.activationScripts.postActivation.text = ''
+    echo ""
+    echo "=================================================="
+    echo "IMPORTANT: Manual steps required for AeroSpace:"
+    echo "1. Open System Settings > Privacy & Security > Accessibility"
+    echo "2. Click the lock to make changes"
+    echo "3. Add and enable AeroSpace.app"
+    echo "=================================================="
+    echo ""
+  '';
 }
