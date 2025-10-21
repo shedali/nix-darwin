@@ -19,6 +19,7 @@
             enable = true;
             enableRosetta = true;
             user = "franz";
+            autoMigrate = true;
           };
         }
       ];
@@ -34,6 +35,7 @@
             enable = true;
             enableRosetta = true;
             user = "franz";
+            autoMigrate = true;
           };
         }
       ];

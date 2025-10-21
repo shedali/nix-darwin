@@ -12,15 +12,12 @@
       "appleboy/tap"
       "aws/tap"
       "bbc/audiowaveform"
-      "dagger/tap"
       "dart-lang/dart"
       "garden-io/garden"
       "hashicorp/tap"
       "heroku/brew"
       "homebrew/bundle"
-      "homebrew/core"
       "homebrew/services"
-      "jondot/tap"
       "mrkai77/cask"
       "netlify/git-credential-netlify"
       "nikitabobko/tap"
@@ -39,13 +36,11 @@
     brews = [
       "appleboy/tap/codegpt"
       "coreutils"
-      "dagger/tap/dagger"
       "dash"
       "gh"
-      "home-assistant"
+      "homeassistant-cli"
       "httpie"
       "ipsw"
-      "jondot/tap/hygen"
       "mas"
       "oxen-ai/oxen/oxen"
       "python@3.12"
@@ -75,7 +70,6 @@
       "devonthink"
       "discord"
       "disk-inventory-x"
-      "docker"
       "fantastical"
       "farrago"
       "figma"
@@ -199,7 +193,6 @@
       "Xcode" = 497799835;
       "Yoink" = 457622435;
       "iA Writer" = 775737590;
-      "iMovie" = 408981434;
     };
   };
 }
