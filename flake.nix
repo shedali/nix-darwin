@@ -40,5 +40,21 @@
         }
       ];
     };
+
+    # Mac Mini configuration - minimal server/utility setup
+    darwinConfigurations."mini" = nix-darwin.lib.darwinSystem {
+      modules = [
+        ./mini.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = "franz";
+            autoMigrate = true;
+          };
+        }
+      ];
+    };
   };
 }

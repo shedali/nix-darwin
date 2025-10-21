@@ -2,11 +2,34 @@
 
 This directory contains the nix-darwin configuration for managing macOS system settings.
 
+## Available Profiles
+
+- **personal** - Full app suite for personal machine
+- **work** - Minimal work-focused apps
+- **mini** - Minimal server/utility setup for Mac mini
+
 ## Initial Setup (New System)
 
-### Option 1: Remote Install (One-Liner)
+### Option 1: Bootstrap Script (Recommended)
+One command that automatically handles everything:
+- Installs Determinate Nix (if not already installed)
+- Backs up existing shell configs
+- Installs nix-darwin with chosen profile
+
 ```bash
-# Backup existing shell configs (if they exist)
+# Personal machine
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- personal
+
+# Work machine
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- work
+
+# Mac mini
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- mini
+```
+
+### Option 2: Manual Install
+```bash
+# Backup existing shell configs (if they exist) - ONLY NEEDED ONCE
 sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin 2>/dev/null || true
 sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin 2>/dev/null || true
 sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
@@ -15,13 +38,13 @@ sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
 sudo nix run nix-darwin -- switch --flake github:shedali/nix-darwin#personal
 ```
 
-### Option 2: Local Install (For Customization)
+### Option 3: Local Install (For Customization)
 ```bash
 # Clone the repository
-git clone https://github.com/shedali/nix-darwin.git ~/.config/nix-darwin
+git clone https://github.com/shedali/nix-darwin.git ~/dev/shedali/nix-darwin
 
 # Update the configuration with your username and hostname
-cd ~/.config/nix-darwin
+cd ~/dev/shedali/nix-darwin
 # Edit flake.nix: change "franz" to your username
 # Edit flake.nix: change "personal" to your hostname
 
@@ -31,7 +54,7 @@ sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin 2>/dev/null || true
 sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
 
 # Bootstrap nix-darwin and apply config
-sudo nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+sudo nix run nix-darwin -- switch --flake ~/dev/shedali/nix-darwin
 ```
 
 ### Get Your Current Hostname
@@ -43,17 +66,17 @@ scutil --get LocalHostName
 
 ### Apply Configuration Changes
 ```bash
-sudo darwin-rebuild switch --flake ~/.config/nix-darwin
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin
 ```
 
 ### View Changes Without Applying
 ```bash
-sudo darwin-rebuild build --flake ~/.config/nix-darwin
+sudo darwin-rebuild build --flake ~/dev/shedali/nix-darwin
 ```
 
 ### Check Configuration
 ```bash
-nix flake check ~/.config/nix-darwin
+nix flake check ~/dev/shedali/nix-darwin
 ```
 
 ## Important Configuration Details
@@ -76,9 +99,14 @@ This system uses Determinate Nix, which has its own daemon. Therefore:
 ## File Structure
 
 ```
-~/.config/nix-darwin/
+~/dev/shedali/nix-darwin/
 ├── flake.nix          # Main configuration file
 ├── flake.lock         # Locked dependency versions
+├── bootstrap.sh       # Automated installation script
+├── personal.nix       # Personal profile configuration
+├── work.nix           # Work profile configuration
+├── mini.nix           # Mac mini profile configuration
+├── shared.nix         # Shared configuration across all profiles
 └── CLAUDE.md          # This file
 ```
 
@@ -94,8 +122,8 @@ Take a screenshot with `Cmd+Shift+3` or `Cmd+Shift+4`
 
 ### Update Dependencies
 ```bash
-nix flake update ~/.config/nix-darwin
-sudo darwin-rebuild switch --flake ~/.config/nix-darwin
+nix flake update ~/dev/shedali/nix-darwin
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin
 ```
 
 ### View Available Options
@@ -122,7 +150,7 @@ sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin
 ### "file 'darwin' was not found" Error
 Use the system-installed `darwin-rebuild` instead of `nix run`:
 ```bash
-sudo darwin-rebuild switch --flake ~/.config/nix-darwin
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin
 ```
 
 ### Changes Not Taking Effect
@@ -140,3 +168,21 @@ Some settings require:
 ## Hostname
 System hostname (LocalHostName): `personal`
 This must match the configuration name in `flake.nix`: `darwinConfigurations."personal"`
+
+## Mac Mini Setup
+
+One-command setup for Mac mini with the `mini` profile:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- mini
+```
+
+This single command automatically:
+- Installs Determinate Nix (if not already installed)
+- Backs up existing shell configs
+- Installs and configures nix-darwin with the mini profile
+
+The mini profile includes:
+- **Casks:** 1Password, Ghostty, Raycast
+- **Brews:** gh, mas
+- **Mac App Store:** Tailscale

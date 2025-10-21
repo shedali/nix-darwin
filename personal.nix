@@ -39,13 +39,11 @@
       "dash"
       "gh"
       "homeassistant-cli"
-      "httpie"
       "ipsw"
       "mas"
       "oxen-ai/oxen/oxen"
       "python@3.12"
       "render-oss/render/render"
-      "sbdchd/skim/skim"
       "ubuntu/microk8s/microk8s"
     ];
 
@@ -55,12 +53,10 @@
       "alacritty"
       "alfred"
       "nikitabobko/tap/aerospace"
-      "arc"
       "audio-hijack"
       "balenaetcher"
       "bibdesk"
       "busycontacts"
-      "calibre"
       "cardhop"
       "chatgpt"
       "claude"
@@ -78,7 +74,6 @@
       "fission"
       "font-monaspace"
       "fontforge-app"
-      "fork"
       "gemini"
       "ghostty"
       "gitbutler"
@@ -89,7 +84,6 @@
       "handbrakebatch"
       "hazel"
       "hdhomerun"
-      "hiddenbar"
       "hookmark"
       "iina"
       "insta360-studio"
@@ -99,7 +93,6 @@
       "limitless"
       "loopback"
       "losslesscut"
-      "macfuse"
       "minstaller"
       "neofinder"
       "ngrok"
@@ -132,15 +125,12 @@
       "sonos"
       "sony-ps-remote-play"
       "soundsource"
-      "spotify"
       "sublime-merge"
       "sublime-text"
       "telegram"
       "thingsmacsandboxhelper"
       "utm"
       "visual-studio-code"
-      "whatsapp"
-      "workflowy"
       "zoom"
     ];
 
@@ -150,39 +140,21 @@
       "Black Out" = 1319884285;
       "Cardhop" = 1290358394;
       "ColorSlurp" = 1287239339;
-      "Comic Life 3" = 688953417;
       "DaisyDisk" = 411643860;
-      "Day One" = 1055511498;
       "djay Pro" = 450527929;
       "Drafts" = 1435957248;
       "Due" = 524373870;
-      "ExcalidrawZ" = 6636493997;
-      "Exporter" = 1099120373;
       "FileBot" = 905384638;
-      "ImageOptim" = 1450716465;
-      "Kaleidoscope" = 1575557335;
-      "Keynote" = 409183694;
       "MindNode Next" = 6446116532;
-      "Numbers" = 409203825;
       "OmniFocus" = 1542143627;
-      "OmniGraffle" = 1142578753;
-      "OneDrive" = 823766827;
-      "Overlap" = 1516950324;
-      "Pages" = 409201541;
-      "Paprika Recipe Manager 3" = 1303222628;
       "Pixelmator" = 407963104;
-      "Prime Video" = 545519333;
-      "Reeder" = 1529448980;
       "Ring" = 1142753258;
       "Screens 5" = 1663047912;
       "Soro" = 1550457805;
       "Soulver 2" = 413965349;
-      "Spark" = 1176895641;
       "Tailscale" = 1475387142;
       "Things" = 904280696;
       "Webp Converter" = 1527716894;
-      "WhatsApp" = 310633997;
-      "WiFi Explorer" = 494803304;
       "Xcode" = 497799835;
       "Yoink" = 457622435;
       "iA Writer" = 775737590;
