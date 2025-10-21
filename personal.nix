@@ -161,9 +161,7 @@
       "ExcalidrawZ" = 6636493997;
       "Exporter" = 1099120373;
       "FileBot" = 905384638;
-      "Final Cut Pro" = 424389933;
       "Frame.io" = 992958444;
-      "GarageBand" = 682658836;
       "ImageOptim" = 1450716465;
       "Ivory" = 6444602274;
       "Kaleidoscope" = 1575557335;
