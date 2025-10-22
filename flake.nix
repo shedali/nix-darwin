@@ -11,6 +11,7 @@
   outputs = { self, nix-darwin, nixpkgs, nix-homebrew }: {
     # Personal configuration - full app suite
     darwinConfigurations."personal" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       modules = [
         ./personal.nix
         nix-homebrew.darwinModules.nix-homebrew
@@ -27,6 +28,7 @@
 
     # Work configuration - minimal work-focused apps
     darwinConfigurations."work" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       modules = [
         ./work.nix
         nix-homebrew.darwinModules.nix-homebrew
@@ -43,6 +45,7 @@
 
     # Mac Mini configuration - minimal server/utility setup
     darwinConfigurations."mini" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       modules = [
         ./mini.nix
         nix-homebrew.darwinModules.nix-homebrew
