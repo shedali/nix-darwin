@@ -60,7 +60,6 @@
     casks = [
       "1password"
       "airfoil"
-      "alacritty"
       "alfred"
       "nikitabobko/tap/aerospace"
       "audio-hijack"
