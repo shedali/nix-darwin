@@ -28,8 +28,6 @@
       "garden-io/garden"
       "hashicorp/tap"
       "heroku/brew"
-      "homebrew/bundle"
-      "homebrew/services"
       "mrkai77/cask"
       "netlify/git-credential-netlify"
       "nikitabobko/tap"
