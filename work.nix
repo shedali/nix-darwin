@@ -32,6 +32,7 @@
       "docker"
       "ghostty"
       "google-chrome"
+      "obsidian"
       "slack"
       "visual-studio-code"
     ];
