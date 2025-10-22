@@ -32,7 +32,6 @@
       "netlify/git-credential-netlify"
       "nikitabobko/tap"
       "oxen-ai/oxen"
-      "render-oss/render"
       "sambadevi/powerlevel9k"
       "saulpw/vd"
       "sbdchd/skim"
@@ -53,7 +52,6 @@
       "mas"
       "oxen-ai/oxen/oxen"
       "python@3.12"
-      "render-oss/render/render"
       "ubuntu/microk8s/microk8s"
     ];
 
