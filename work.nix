@@ -20,10 +20,12 @@
     onActivation.cleanup = "zap";
 
     taps = [
+      "atlassian/homebrew-acli"
       "nikitabobko/tap"
     ];
 
     brews = [
+      "acli"
     ];
 
     casks = [

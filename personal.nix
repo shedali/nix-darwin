@@ -22,6 +22,7 @@
     taps = [
       "alexanderwillner/tap"
       "appleboy/tap"
+      "atlassian/homebrew-acli"
       "aws/tap"
       "bbc/audiowaveform"
       "dart-lang/dart"
@@ -43,6 +44,7 @@
     ];
 
     brews = [
+      "acli"
       "appleboy/tap/codegpt"
       "coreutils"
       "dash"
