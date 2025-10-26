@@ -32,6 +32,7 @@
       "1password"
       "nikitabobko/tap/aerospace"
       "ghostty"
+      "google-chrome"
       "utm"
     ];
 
