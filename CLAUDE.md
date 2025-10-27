@@ -7,7 +7,7 @@ This directory contains the nix-darwin configuration for managing macOS system s
 ### Personal Profile
 Full app suite for personal machine including:
 - **Window Manager:** AeroSpace (auto-starts via launchd)
-- **Development:** Ghostty, Cursor, Visual Studio Code, Docker (via OrbStack)
+- **Development:** Ghostty, Cursor, Visual Studio Code, **OrbStack** (lightweight Docker alternative)
 - **Productivity:** Alfred, Raycast, 1Password, Obsidian, Things
 - **Media:** Plex, Plexamp, IINA, ScreenFlow
 - **Communication:** Slack, Discord, Telegram, Signal
@@ -18,8 +18,9 @@ Full app suite for personal machine including:
 Minimal work-focused setup including:
 - **Window Manager:** AeroSpace (auto-starts via launchd)
 - **Core Apps:** Ghostty, Visual Studio Code, Slack, Google Chrome
-- **Tools:** 1Password, Docker
+- **Tools:** 1Password, **Docker Desktop** (docker cask)
 - **Dock:** Ghostty, Slack, Chrome
+- **Note:** Uses Docker Desktop (not OrbStack) for work compatibility
 
 ### Mini Profile
 Minimal server/utility setup for Mac mini including:
@@ -28,6 +29,18 @@ Minimal server/utility setup for Mac mini including:
 - **CLI Tools:** gh, mas
 - **Remote Access:** Tailscale (Mac App Store)
 - **Dock:** Ghostty only
+
+## Which Profile Should I Use?
+
+Choose based on your machine's hostname (check with `scutil --get LocalHostName`):
+- **Hostname: `personal`** → Use `#personal` profile
+- **Hostname: `chase`** → Use `#work` profile
+- **Hostname: `mini`** → Use `#mini` profile
+
+**Important:** Each profile has a different Docker solution:
+- **Personal**: OrbStack (lightweight, fast)
+- **Work**: Docker Desktop (standard, enterprise-compatible)
+- **Mini**: No Docker
 
 ## Initial Setup (New System)
 
@@ -86,13 +99,23 @@ scutil --get LocalHostName
 ## Quick Reference
 
 ### Apply Configuration Changes
+**IMPORTANT:** Use the correct profile for your machine!
+
 ```bash
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin
+# For personal machine (hostname: personal)
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#personal
+
+# For work machine (hostname: chase)
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#work
+
+# For Mac mini (hostname: mini)
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#mini
 ```
 
 ### View Changes Without Applying
 ```bash
-sudo darwin-rebuild build --flake ~/dev/shedali/nix-darwin
+# Replace #work with #personal or #mini as appropriate
+sudo darwin-rebuild build --flake ~/dev/shedali/nix-darwin#work
 ```
 
 ### Check Configuration
