@@ -107,6 +107,7 @@
       "insta360-studio"
       "instantview"
       "jabref"
+      "kaleidoscope"
       "keyboard-maestro"
       "limitless"
       "loopback"
