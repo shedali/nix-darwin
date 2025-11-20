@@ -83,6 +83,7 @@
       "devonthink"
       "discord"
       "disk-inventory-x"
+      "dropbox"
       "fantastical"
       "farrago"
       "figma"
