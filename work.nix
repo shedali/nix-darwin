@@ -17,6 +17,7 @@
   homebrew = {
     enable = true;
     onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
     taps = [
@@ -30,9 +31,10 @@
 
     casks = [
       "1password"
-      "nikitabobko/tap/aerospace"
+      "aerospace"
       "docker"
       "ghostty"
+      "github"
       "google-chrome"
       "obsidian"
       "slack"
