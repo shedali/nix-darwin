@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [ ./shared.nix ];
 
-  # Launch AeroSpace automatically
+  # Launch AeroSpace automatically via launchd (not macOS Login Items)
   launchd.user.agents.aerospace = {
     path = [ "/usr/bin" "/usr/local/bin" ];
     serviceConfig = {
@@ -12,6 +12,12 @@
       StandardOutPath = "/tmp/aerospace.out.log";
     };
   };
+
+  # AeroSpace is managed via launchd (above) but the cask/app may auto-add itself to Login Items
+  # This activation script ensures it stays removed from Login Items to prevent duplicate instances
+  system.activationScripts.postActivation.text = ''
+    /usr/bin/osascript -e 'tell application "System Events" to delete login item "AeroSpace"' 2>/dev/null || true
+  '';
 
   # Personal Homebrew configuration
   homebrew = {
@@ -61,7 +67,7 @@
       "1password"
       "airfoil"
       "alfred"
-      "nikitabobko/tap/aerospace"
+      "aerospace"
       "audio-hijack"
       "balenaetcher"
       "bibdesk"
