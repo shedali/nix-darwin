@@ -18,7 +18,7 @@
         {
           nix-homebrew = {
             enable = true;
-            enableRosetta = true;
+            enableRosetta = false;
             user = "franz";
             autoMigrate = true;
           };
@@ -35,7 +35,7 @@
         {
           nix-homebrew = {
             enable = true;
-            enableRosetta = true;
+            enableRosetta = false;
             user = "franz";
             autoMigrate = true;
           };
@@ -52,7 +52,24 @@
         {
           nix-homebrew = {
             enable = true;
-            enableRosetta = true;
+            enableRosetta = false;
+            user = "franz";
+            autoMigrate = true;
+          };
+        }
+      ];
+    };
+
+    # MacBook Air configuration - minimal portable setup
+    darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./air.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = false;
             user = "franz";
             autoMigrate = true;
           };
