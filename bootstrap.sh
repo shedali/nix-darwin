@@ -4,7 +4,15 @@ set -e
 # Bootstrap script for nix-darwin installation
 # Usage: curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- <profile>
 
+VALID_PROFILES="personal work mini air"
 PROFILE="${1:-personal}"
+
+# Validate profile
+if ! echo "$VALID_PROFILES" | grep -qw "$PROFILE"; then
+    echo "Error: Invalid profile '$PROFILE'"
+    echo "Valid profiles: $VALID_PROFILES"
+    exit 1
+fi
 
 echo "Installing nix-darwin with profile: $PROFILE"
 
