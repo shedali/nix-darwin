@@ -37,6 +37,7 @@
     ];
 
     masApps = {
+      "Screens 5" = 1663047912;
       "Tailscale" = 1475387142;
     };
   };
