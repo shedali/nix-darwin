@@ -45,6 +45,7 @@
     brews = [
       "gh"
       "mas"
+      "syncthing"
     ];
 
     casks = [

@@ -43,6 +43,7 @@
       "mas"
       "oxen-ai/oxen/oxen"
       "python@3.12"
+      "syncthing"
       "ubuntu/microk8s/microk8s"
     ];
 

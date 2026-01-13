@@ -27,6 +27,7 @@
 
     brews = [
       "acli"
+      "syncthing"
     ];
 
     casks = [
