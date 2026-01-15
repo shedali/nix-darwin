@@ -60,6 +60,23 @@
       ];
     };
 
+    # Chase host configuration - work machine with productivity apps
+    darwinConfigurations."chasehost" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./chasehost.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = false;
+            user = "franz";
+            autoMigrate = true;
+          };
+        }
+      ];
+    };
+
     # MacBook Air configuration - minimal portable setup
     darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";

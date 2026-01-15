@@ -1,5 +1,36 @@
 { pkgs, ... }: {
-  imports = [ ./shared.nix ];
+  # Work profile - standalone configuration (does not import shared.nix)
+
+  # Disable nix-darwin's Nix management (using Determinate Nix)
+  nix.enable = false;
+
+  # Set primary user for user-specific settings
+  system.primaryUser = "franz";
+
+  # System defaults
+  system.defaults = {
+    dock.autohide = false;
+    dock.persistent-apps = [
+      "/Applications/Ghostty.app"
+      "/Applications/Slack.app"
+      "/Applications/Google Chrome.app"
+    ];
+    finder.ShowPathbar = true;
+    finder.ShowStatusBar = true;
+    screencapture.location = "~/Pictures/Screenshots";
+  };
+
+  # Common packages
+  environment.systemPackages = [ pkgs.vim pkgs.neovim ];
+
+  # Set Git commit hash for darwin-version
+  system.configurationRevision = null;
+
+  # Used for backwards compatibility
+  system.stateVersion = 6;
+
+  # Platform
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Launch AeroSpace automatically
   launchd.user.agents.aerospace = {
@@ -40,6 +71,9 @@
 
     brews = [
       "acli"
+      "gh"
+      "git-lfs"
+      "mas"
       "syncthing"
     ];
 
@@ -47,10 +81,7 @@
       "1password"
       "aerospace"
       "ghostty"
-      "github"
       "google-chrome"
-      "obsidian"
-      "raycast"
       "slack"
       "visual-studio-code"
     ];
@@ -59,10 +90,15 @@
     };
   };
 
-  # Override dock settings for work - use Ghostty instead of Terminal
-  system.defaults.dock.persistent-apps = [
-    "/Applications/Ghostty.app"
-    "/Applications/Slack.app"
-    "/Applications/Google Chrome.app"
-  ];
+  # Post-activation script
+  system.activationScripts.postActivation.text = ''
+    echo ""
+    echo "=================================================="
+    echo "IMPORTANT: Manual steps required for AeroSpace:"
+    echo "1. Open System Settings > Privacy & Security > Accessibility"
+    echo "2. Click the lock to make changes"
+    echo "3. Add and enable AeroSpace.app"
+    echo "=================================================="
+    echo ""
+  '';
 }

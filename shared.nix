@@ -17,6 +17,31 @@
   # Common packages
   environment.systemPackages = [ pkgs.vim pkgs.neovim ];
 
+  # Shared Homebrew apps across all profiles
+  homebrew = {
+    taps = [
+      "nikitabobko/tap"
+    ];
+    brews = [
+      "gh"
+      "git-lfs"
+      "mas"
+    ];
+    casks = [
+      "1password"
+      "aerospace"
+      "ghostty"
+      "google-chrome"
+      "obsidian"
+      "raycast"
+    ];
+    masApps = {
+      "Drafts" = 1435957248;
+      "Spark" = 6445813049;
+      "Things" = 904280696;
+    };
+  };
+
   # Set Git commit hash for darwin-version
   system.configurationRevision = null;
 

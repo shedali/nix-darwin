@@ -20,20 +20,9 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [
-      "nikitabobko/tap"
-    ];
-
-    brews = [
-      "gh"
-      "mas"
-    ];
-
+    # Air-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)
+    # masApps from shared.nix: Drafts, Spark, Things
     casks = [
-      "1password"
-      "aerospace"
-      "ghostty"
-      "google-chrome"
     ];
 
     masApps = {

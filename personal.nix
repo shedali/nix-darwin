@@ -8,6 +8,7 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
+    # Personal taps (nikitabobko/tap comes from shared.nix)
     taps = [
       "alexanderwillner/tap"
       "appleboy/tap"
@@ -20,7 +21,6 @@
       "heroku/brew"
       "mrkai77/cask"
       "netlify/git-credential-netlify"
-      "nikitabobko/tap"
       "oxen-ai/oxen"
       "sambadevi/powerlevel9k"
       "saulpw/vd"
@@ -47,11 +47,11 @@
       "ubuntu/microk8s/microk8s"
     ];
 
+    # Personal casks (1password, aerospace, ghostty, google-chrome, obsidian, raycast come from shared.nix)
+    # masApps: Drafts, Spark, Things come from shared.nix
     casks = [
-      "1password"
       "airfoil"
       "alfred"
-      "aerospace"
       "audio-hijack"
       "balenaetcher"
       "bibdesk"
@@ -77,10 +77,8 @@
       "font-monaspace"
       "fontforge-app"
       "gemini"
-      "ghostty"
       "gitbutler"
       "gitup-app"
-      "google-chrome"
       "google-drive"
       "hammerspoon"
       "handbrakebatch"
@@ -93,7 +91,6 @@
       "jabref"
       "kaleidoscope"
       "keyboard-maestro"
-      "limitless"
       "loopback"
       "losslesscut"
       "minstaller"
@@ -103,7 +100,6 @@
       "notion-calendar"
       "notion"
       "numi"
-      "obsidian"
       "opera@beta"
       "orbstack"
       "parallels"
@@ -116,7 +112,6 @@
       "pocket-casts"
       "popclip"
       "qlmarkdown"
-      "raycast"
       "reader"
       "readwise-ibooks"
       "reaper"
@@ -145,7 +140,6 @@
       "ColorSlurp" = 1287239339;
       "DaisyDisk" = 411643860;
       "djay Pro" = 450527929;
-      "Drafts" = 1435957248;
       "Due" = 524373870;
       "FileBot" = 905384638;
       "MindNode Next" = 6446116532;
@@ -156,7 +150,6 @@
       "Soro" = 1550457805;
       "Soulver 2" = 413965349;
       "Tailscale" = 1475387142;
-      "Things" = 904280696;
       "Webp Converter" = 1527716894;
       "Xcode" = 497799835;
       "Yoink" = 457622435;
