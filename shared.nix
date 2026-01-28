@@ -34,10 +34,10 @@
       "google-chrome"
       "obsidian"
       "raycast"
+      "readdle-spark"
     ];
     masApps = {
       "Drafts" = 1435957248;
-      "Spark" = 6445813049;
       "Things" = 904280696;
     };
   };

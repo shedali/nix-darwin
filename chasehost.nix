@@ -49,6 +49,7 @@
       "cleanshot"
       "claude"
       "devonthink"
+      "discord"
       "dropbox"
       "parallels"
       "slack"

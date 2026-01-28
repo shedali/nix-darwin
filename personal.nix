@@ -129,6 +129,7 @@
       "thingsmacsandboxhelper"
       "utm"
       "visual-studio-code"
+      "whisperflow"
       "zoom"
     ];
 
