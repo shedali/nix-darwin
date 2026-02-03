@@ -26,23 +26,6 @@
       ];
     };
 
-    # Work configuration - minimal work-focused apps
-    darwinConfigurations."work" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./work.nix
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = false;
-            user = "franz";
-            autoMigrate = true;
-          };
-        }
-      ];
-    };
-
     # Mac Mini configuration - minimal server/utility setup
     darwinConfigurations."mini" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
@@ -82,6 +65,23 @@
       system = "aarch64-darwin";
       modules = [
         ./air.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = false;
+            user = "franz";
+            autoMigrate = true;
+          };
+        }
+      ];
+    };
+
+    # Chase VM configuration - for Chase virtual machines
+    darwinConfigurations."chasevm" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./chasevm.nix
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {

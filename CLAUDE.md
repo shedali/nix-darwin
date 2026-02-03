@@ -4,6 +4,14 @@ This directory contains the nix-darwin configuration for managing macOS system s
 
 ## Available Profiles
 
+| Profile | File | Purpose |
+|---------|------|---------|
+| `#personal` | personal.nix | Full personal setup (imports shared.nix) |
+| `#mini` | mini.nix | Mac mini server (imports shared.nix) |
+| `#chasehost` | chasehost.nix | Chase work host machine |
+| `#air` | air.nix | MacBook Air portable setup |
+| `#chasevm` | chasevm.nix | Chase virtual machines |
+
 ### Personal Profile
 Full app suite for personal machine including:
 - **Window Manager:** AeroSpace (auto-starts via launchd)
@@ -14,14 +22,6 @@ Full app suite for personal machine including:
 - **Utilities:** Hammerspoon, Hazel, Keyboard Maestro, CleanShot
 - Plus many specialized tools and Mac App Store apps
 
-### Work Profile
-Minimal work-focused setup including:
-- **Window Manager:** AeroSpace (auto-starts via launchd)
-- **Core Apps:** Ghostty, Visual Studio Code, Slack, Google Chrome
-- **Tools:** 1Password, **Docker Desktop** (docker cask)
-- **Dock:** Ghostty, Slack, Chrome
-- **Note:** Uses Docker Desktop (not OrbStack) for work compatibility
-
 ### Mini Profile
 Minimal server/utility setup for Mac mini including:
 - **Window Manager:** AeroSpace (auto-starts via launchd)
@@ -30,17 +30,51 @@ Minimal server/utility setup for Mac mini including:
 - **Remote Access:** Tailscale (Mac App Store)
 - **Dock:** Ghostty only
 
-## Which Profile Should I Use?
+### Chase Host Profile
+Work machine with productivity apps for the Chase host macOS.
 
-Choose based on your machine's hostname (check with `scutil --get LocalHostName`):
-- **Hostname: `personal`** → Use `#personal` profile
-- **Hostname: `chase`** → Use `#work` profile
-- **Hostname: `mini`** → Use `#mini` profile
+### Air Profile
+Minimal portable setup for MacBook Air.
 
-**Important:** Each profile has a different Docker solution:
-- **Personal**: OrbStack (lightweight, fast)
-- **Work**: Docker Desktop (standard, enterprise-compatible)
-- **Mini**: No Docker
+### Chase VM Profile
+Minimal work-focused setup for Chase virtual machines:
+- **Window Manager:** AeroSpace (auto-starts via launchd)
+- **Core Apps:** Ghostty, Visual Studio Code, Slack, Google Chrome
+- **Tools:** 1Password, Syncthing
+- **Dock:** Ghostty, Slack, Chrome
+
+## Quick Reference
+
+### Apply Configuration Changes
+
+Use `darwin-switch` function to interactively select and apply a profile, or run directly:
+
+```bash
+# Personal machine
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#personal
+
+# Mac mini
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#mini
+
+# Chase host
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#chasehost
+
+# MacBook Air
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#air
+
+# Chase VM
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#chasevm
+```
+
+### View Changes Without Applying
+```bash
+sudo darwin-rebuild build --flake ~/dev/shedali/nix-darwin#personal
+```
+
+### Check Configuration
+```bash
+nix flake check ~/dev/shedali/nix-darwin
+```
 
 ## Initial Setup (New System)
 
@@ -54,8 +88,8 @@ One command that automatically handles everything:
 # Personal machine
 curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- personal
 
-# Work machine
-curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- work
+# Chase VM
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- chasevm
 
 # Mac mini
 curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- mini
@@ -77,50 +111,13 @@ sudo nix run nix-darwin -- switch --flake github:shedali/nix-darwin#personal
 # Clone the repository
 git clone https://github.com/shedali/nix-darwin.git ~/dev/shedali/nix-darwin
 
-# Update the configuration with your username and hostname
-cd ~/dev/shedali/nix-darwin
-# Edit flake.nix: change "franz" to your username
-# Edit flake.nix: change "personal" to your hostname
-
 # Backup existing shell configs (if they exist)
 sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin 2>/dev/null || true
 sudo mv /etc/zprofile /etc/zprofile.before-nix-darwin 2>/dev/null || true
 sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin 2>/dev/null || true
 
 # Bootstrap nix-darwin and apply config
-sudo nix run nix-darwin -- switch --flake ~/dev/shedali/nix-darwin
-```
-
-### Get Your Current Hostname
-```bash
-scutil --get LocalHostName
-```
-
-## Quick Reference
-
-### Apply Configuration Changes
-**IMPORTANT:** Use the correct profile for your machine!
-
-```bash
-# For personal machine (hostname: personal)
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#personal
-
-# For work machine (hostname: chase)
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#work
-
-# For Mac mini (hostname: mini)
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#mini
-```
-
-### View Changes Without Applying
-```bash
-# Replace #work with #personal or #mini as appropriate
-sudo darwin-rebuild build --flake ~/dev/shedali/nix-darwin#work
-```
-
-### Check Configuration
-```bash
-nix flake check ~/dev/shedali/nix-darwin
+sudo nix run nix-darwin -- switch --flake ~/dev/shedali/nix-darwin#personal
 ```
 
 ## Important Configuration Details
@@ -178,10 +175,12 @@ killall AeroSpace
 ├── flake.nix          # Main configuration file
 ├── flake.lock         # Locked dependency versions
 ├── bootstrap.sh       # Automated installation script
+├── shared.nix         # Shared configuration (imported by personal, mini)
 ├── personal.nix       # Personal profile configuration
-├── work.nix           # Work profile configuration
 ├── mini.nix           # Mac mini profile configuration
-├── shared.nix         # Shared configuration across all profiles
+├── chasehost.nix      # Chase host profile configuration
+├── air.nix            # MacBook Air profile configuration
+├── chasevm.nix        # Chase VM profile configuration
 └── CLAUDE.md          # This file
 ```
 
@@ -198,7 +197,7 @@ Take a screenshot with `Cmd+Shift+3` or `Cmd+Shift+4`
 ### Update Dependencies
 ```bash
 nix flake update ~/dev/shedali/nix-darwin
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#personal
 ```
 
 ### View Available Options
@@ -239,40 +238,3 @@ Some settings require:
 - [nix-darwin Manual](https://daiderd.com/nix-darwin/manual/index.html)
 - [nix-darwin Options Search](https://daiderd.com/nix-darwin/manual/index.html#sec-options)
 - [nix-darwin GitHub](https://github.com/LnL7/nix-darwin)
-
-## Hostname
-System hostname (LocalHostName): `personal`
-This must match the configuration name in `flake.nix`: `darwinConfigurations."personal"`
-
-## Recent Changes
-
-### 2025-10-21
-- Added **AeroSpace** window manager to all three profiles (personal, work, mini)
-  - Installed via Homebrew cask with auto-start via launchd
-  - Configuration managed by home-manager
-- Removed many apps from personal profile (cleanup of unused apps)
-- Created minimal **mini profile** for Mac mini
-  - Only: 1Password, Ghostty, AeroSpace, Tailscale, gh, mas
-- Removed Raycast from mini profile (not needed for headless use)
-- Created **bootstrap script** for automated setup
-- Updated documentation with current profile states
-
-## Mac Mini Setup
-
-One-command setup for Mac mini with the `mini` profile:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- mini
-```
-
-This single command automatically:
-- Installs Determinate Nix (if not already installed)
-- Backs up existing shell configs
-- Installs and configures nix-darwin with the mini profile
-
-The mini profile includes:
-- **Window Manager:** AeroSpace (with auto-start)
-- **GUI Apps:** 1Password, Ghostty
-- **CLI Tools:** gh (GitHub CLI), mas (Mac App Store CLI)
-- **Remote Access:** Tailscale (Mac App Store)
-- **Dock:** Only Ghostty

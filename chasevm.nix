@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  # Work profile - standalone configuration (does not import shared.nix)
+  # Chase VM profile - for Chase virtual machines (standalone, does not import shared.nix)
 
   # Disable nix-darwin's Nix management (using Determinate Nix)
   nix.enable = false;

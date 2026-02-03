@@ -54,6 +54,7 @@
       "parallels"
       "slack"
       "telegram"
+      "zoom"
     ];
 
     masApps = {
