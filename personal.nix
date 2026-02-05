@@ -61,7 +61,6 @@
       "chatgpt-atlas"
       "claude"
       "cleanshot"
-      "comet-ai"
       "cursor"
       "dash"
       "devonthink"
