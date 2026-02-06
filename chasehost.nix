@@ -51,6 +51,7 @@
       "devonthink"
       "discord"
       "dropbox"
+      "fantastical"
       "parallels"
       "slack"
       "telegram"
