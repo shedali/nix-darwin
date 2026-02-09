@@ -69,11 +69,11 @@
       "google-chrome"
       "obsidian"
       "raycast"
-      "readdle-spark"
     ];
     masApps = {
       "Drafts" = 1435957248;
       "Tailscale" = 1475387142;
+      "Spark Classic" = 1176895641;
       "Things" = 904280696;
     };
   };

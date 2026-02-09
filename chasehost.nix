@@ -60,10 +60,12 @@
       "hammerspoon"
       "keyboard-maestro"
       "orbstack"
+      "island"
       "parallels"
       "rocket"
       "slack"
       "telegram"
+      "termius"
       "zoom"
     ];
 
