@@ -51,6 +51,7 @@
     # masApps: Drafts, Spark, Things come from shared.nix
     casks = [
       "airfoil"
+      "antigravity"
       "alfred"
       "audio-hijack"
       "balenaetcher"
