@@ -45,6 +45,7 @@
     # Chasehost-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
+      "alfred"
       "antigravity"
       "chatgpt"
       "cleanshot"
@@ -53,7 +54,12 @@
       "discord"
       "dropbox"
       "fantastical"
+      "google-drive"
+      "hammerspoon"
+      "keyboard-maestro"
+      "orbstack"
       "parallels"
+      "rocket"
       "slack"
       "telegram"
       "zoom"

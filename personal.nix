@@ -116,6 +116,7 @@
       "readwise-ibooks"
       "reaper"
       "resilio-sync"
+      "rocket"
       "responsively"
       "screenflow"
       "signal"
