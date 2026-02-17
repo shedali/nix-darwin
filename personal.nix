@@ -152,7 +152,6 @@
       "Screens 5" = 1663047912;
       "Soro" = 1550457805;
       "Soulver 2" = 413965349;
-      "Tailscale" = 1475387142;
       "Webp Converter" = 1527716894;
       "Xcode" = 497799835;
       "Yoink" = 457622435;

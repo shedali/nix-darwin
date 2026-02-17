@@ -73,7 +73,6 @@
       "MindNode Next" = 6446116532;
       "OmniFocus" = 1542143627;
       "Screens 5" = 1663047912;
-      "Tailscale" = 1475387142;
       "Xcode" = 497799835;
       "Yoink" = 457622435;
     };

@@ -73,6 +73,7 @@
     ];
     masApps = {
       "Drafts" = 1435957248;
+      "Tailscale" = 1475387142;
       "Things" = 904280696;
     };
   };
