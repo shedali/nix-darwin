@@ -47,6 +47,7 @@
     casks = [
       "alfred"
       "antigravity"
+      "bambu-studio"
       "chatgpt"
       "cleanshot"
       "claude"

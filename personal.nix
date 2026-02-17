@@ -53,6 +53,7 @@
       "airfoil"
       "antigravity"
       "alfred"
+      "bambu-studio"
       "audio-hijack"
       "balenaetcher"
       "bibdesk"
