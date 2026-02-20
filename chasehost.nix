@@ -51,6 +51,7 @@
       "chatgpt"
       "cleanshot"
       "claude"
+      "codex-app"
       "devonthink"
       "discord"
       "dropbox"

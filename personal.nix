@@ -62,6 +62,7 @@
       "chatgpt"
       "chatgpt-atlas"
       "claude"
+      "codex-app"
       "cleanshot"
       "cursor"
       "dash"
