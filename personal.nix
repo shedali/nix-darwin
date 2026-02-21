@@ -55,6 +55,7 @@
       "alfred"
       "bambu-studio"
       "audio-hijack"
+      "autodesk-fusion"
       "balenaetcher"
       "bibdesk"
       "busycontacts"

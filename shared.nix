@@ -65,6 +65,7 @@
     casks = [
       "1password"
       "aerospace"
+      "flock"
       "ghostty"
       "google-chrome"
       "obsidian"
