@@ -48,6 +48,7 @@
       "alfred"
       "antigravity"
       "bambu-studio"
+      "betterdisplay"
       "chatgpt"
       "cleanshot"
       "claude"
