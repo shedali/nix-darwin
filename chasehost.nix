@@ -61,7 +61,7 @@
       "hammerspoon"
       "keyboard-maestro"
       "orbstack"
-      "island"
+      "claude-island"
       "parallels"
       "rocket"
       "slack"
