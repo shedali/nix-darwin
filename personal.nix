@@ -143,6 +143,7 @@
     masApps = {
       "Actions For Obsidian" = 1659667937;
       "Actions" = 1586435171;
+      "Spark Classic" = 1176895641;
       "Black Out" = 1319884285;
       "Cardhop" = 1290358394;
       "ColorSlurp" = 1287239339;
