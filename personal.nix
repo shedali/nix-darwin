@@ -29,6 +29,7 @@
       "bbc/audiowaveform"
       "dart-lang/dart"
       "garden-io/garden"
+      "charmbracelet/tap"
       "hashicorp/tap"
       "heroku/brew"
       "mrkai77/cask"
@@ -47,6 +48,7 @@
     brews = [
       "acli"
       "appleboy/tap/codegpt"
+      "mods"
       "coreutils"
       "dash"
       "gh"
