@@ -38,7 +38,12 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
+    taps = [
+      "alexanderwillner/tap"
+    ];
+
     brews = [
+      "alexanderwillner/tap/things.sh"
       "syncthing"
     ];
 
