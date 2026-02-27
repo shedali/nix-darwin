@@ -40,19 +40,32 @@
 
     taps = [
       "alexanderwillner/tap"
+      "openhue/cli"
+      "steipete/tap"
+      "yakitrak/yakitrak"
     ];
 
     brews = [
       "alexanderwillner/tap/things.sh"
       "ollama"
+      "homeassistant-cli"
+      "ical-buddy"
+      "openclaw-cli"
+      "openhue/cli/openhue-cli"
+      "steipete/tap/imsg"
+      "steipete/tap/remindctl"
+      "steipete/tap/sonoscli"
       "syncthing"
+      "whisper-cpp"
+      "yakitrak/yakitrak/obsidian-cli"
+      "yt-dlp"
     ];
 
     # Mini-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
+      "bluebubbles"
       "openclaw"
-      "openclaw-cli"
       "utm"
     ];
 
