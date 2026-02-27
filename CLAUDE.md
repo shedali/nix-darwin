@@ -19,7 +19,7 @@ Full app suite for personal machine including:
 - **Productivity:** Alfred, Raycast, 1Password, Obsidian, Things
 - **Media:** Plex, Plexamp, IINA, ScreenFlow
 - **Communication:** Slack, Discord, Telegram, Signal
-- **Utilities:** Hammerspoon, Hazel, Keyboard Maestro, CleanShot
+- **Utilities:** Hammerspoon, Hazel, Keyboard Maestro, CleanShot, Espanso (text expander, auto-starts via launchd)
 - Plus many specialized tools and Mac App Store apps
 
 ### Mini Profile

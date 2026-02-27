@@ -1,6 +1,18 @@
 { pkgs, ... }: {
   imports = [ ./shared.nix ];
 
+  # Espanso text expander - launcher spawns daemon then exits
+  launchd.user.agents.espanso = {
+    path = [ "/opt/homebrew/bin" ];
+    serviceConfig = {
+      ProgramArguments = [ "/opt/homebrew/bin/espanso" "launcher" ];
+      KeepAlive = false;
+      RunAtLoad = true;
+      StandardErrorPath = "/tmp/espanso.err.log";
+      StandardOutPath = "/tmp/espanso.out.log";
+    };
+  };
+
   # Personal Homebrew configuration
   homebrew = {
     enable = true;
@@ -44,6 +56,7 @@
       "oxen-ai/oxen/oxen"
       "python@3.12"
       "syncthing"
+      "alexanderwillner/tap/things.sh"
       "ubuntu/microk8s/microk8s"
     ];
 
@@ -72,6 +85,7 @@
       "discord"
       "disk-inventory-x"
       "dropbox"
+      "espanso"
       "fantastical"
       "farrago"
       "figma"
@@ -136,7 +150,7 @@
       "typeless"
       "utm"
       "visual-studio-code"
-      "whisperflow"
+      "wispr-flow"
       "zoom"
     ];
 
