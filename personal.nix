@@ -49,6 +49,7 @@
       "acli"
       "appleboy/tap/codegpt"
       "mods"
+      "crush"
       "coreutils"
       "dash"
       "gh"
