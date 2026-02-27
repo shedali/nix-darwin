@@ -44,6 +44,7 @@
 
     brews = [
       "alexanderwillner/tap/things.sh"
+      "ollama"
       "syncthing"
     ];
 
