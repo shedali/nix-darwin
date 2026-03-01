@@ -49,6 +49,7 @@
       "alexanderwillner/tap/things.sh"
       "ollama"
       "homeassistant-cli"
+      "llmfit"
       "ical-buddy"
       "openclaw-cli"
       "openhue/cli/openhue-cli"
