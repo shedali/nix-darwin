@@ -40,6 +40,7 @@
 
     brews = [
       "acli"
+      "aichat"
       "alexanderwillner/tap/things.sh"
       "syncthing"
     ];

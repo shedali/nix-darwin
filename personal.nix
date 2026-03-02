@@ -47,6 +47,7 @@
 
     brews = [
       "acli"
+      "aichat"
       "appleboy/tap/codegpt"
       "mods"
       "crush"
