@@ -49,6 +49,7 @@
       "aichat"
       "appleboy/tap/codegpt"
       "mods"
+      "ollama"
       "crush"
       "coreutils"
       "dash"

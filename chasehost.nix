@@ -40,6 +40,7 @@
     brews = [
       "acli"
       "aichat"
+      "ollama"
       "syncthing"
     ];
 
