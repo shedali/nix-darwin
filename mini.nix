@@ -70,6 +70,7 @@
       "whisper-cpp"
       "yakitrak/yakitrak/obsidian-cli"
       "yt-dlp"
+      "zeroclaw"
     ];
 
     # Mini-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)

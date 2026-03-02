@@ -61,6 +61,7 @@
       "python@3.12"
       "syncthing"
       "ubuntu/microk8s/microk8s"
+      "zeroclaw"
     ];
 
     # Personal casks (1password, aerospace, ghostty, google-chrome, obsidian, raycast come from shared.nix)

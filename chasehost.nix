@@ -42,6 +42,7 @@
       "aichat"
       "ollama"
       "syncthing"
+      "zeroclaw"
     ];
 
     # Chasehost-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)

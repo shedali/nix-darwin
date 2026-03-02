@@ -97,5 +97,6 @@
     echo "3. Add and enable AeroSpace.app"
     echo "=================================================="
     echo ""
+
   '';
 }
