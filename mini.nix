@@ -39,14 +39,12 @@
     onActivation.cleanup = "zap";
 
     taps = [
-      "alexanderwillner/tap"
       "openhue/cli"
       "steipete/tap"
       "yakitrak/yakitrak"
     ];
 
     brews = [
-      "alexanderwillner/tap/things.sh"
       "ollama"
       "homeassistant-cli"
       "llmfit"

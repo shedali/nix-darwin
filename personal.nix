@@ -22,7 +22,6 @@
 
     # Personal taps (nikitabobko/tap comes from shared.nix)
     taps = [
-      "alexanderwillner/tap"
       "appleboy/tap"
       "atlassian/homebrew-acli"
       "aws/tap"
@@ -60,7 +59,6 @@
       "oxen-ai/oxen/oxen"
       "python@3.12"
       "syncthing"
-      "alexanderwillner/tap/things.sh"
       "ubuntu/microk8s/microk8s"
     ];
 

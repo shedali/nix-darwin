@@ -34,14 +34,12 @@
     onActivation.cleanup = "zap";
 
     taps = [
-      "alexanderwillner/tap"
       "atlassian/homebrew-acli"
     ];
 
     brews = [
       "acli"
       "aichat"
-      "alexanderwillner/tap/things.sh"
       "syncthing"
     ];
 
