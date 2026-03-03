@@ -13,6 +13,22 @@
     };
   };
 
+  # Whisper.cpp speech-to-text server (OpenAI-compatible API on port 8090)
+  launchd.user.agents.whisper-server = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${pkgs.whisper-cpp}/bin/whisper-server"
+        "--model" "/Users/franz/.local/share/whisper-cpp/ggml-large-v3-turbo-q5_0.bin"
+        "--port" "8090"
+        "--host" "127.0.0.1"
+      ];
+      KeepAlive = true;
+      RunAtLoad = true;
+      StandardErrorPath = "/tmp/whisper-server.err.log";
+      StandardOutPath = "/tmp/whisper-server.out.log";
+    };
+  };
+
   # Launch Ollama server automatically
   launchd.user.agents.ollama = {
     path = [ "/opt/homebrew/bin" ];
@@ -40,12 +56,10 @@
       "bbc/audiowaveform"
       "dart-lang/dart"
       "garden-io/garden"
-      "charmbracelet/tap"
       "hashicorp/tap"
       "heroku/brew"
       "mrkai77/cask"
       "netlify/git-credential-netlify"
-      "oxen-ai/oxen"
       "sambadevi/powerlevel9k"
       "saulpw/vd"
       "sbdchd/skim"
@@ -62,19 +76,18 @@
       "appleboy/tap/codegpt"
       "mods"
       "ollama"
-      "crush"
       "coreutils"
       "dash"
       "gh"
       "homeassistant-cli"
       "ipsw"
       "mas"
-      "oxen-ai/oxen/oxen"
       "python@3.12"
       "syncthing"
       "tinymist"
       "typst"
       "ubuntu/microk8s/microk8s"
+      "yt-dlp"
       "zeroclaw"
     ];
 
@@ -84,9 +97,9 @@
       "airfoil"
       "antigravity"
       "alfred"
-      "bambu-studio"
       "audio-hijack"
       "autodesk-fusion"
+      "bambu-studio"
       "balenaetcher"
       "bibdesk"
       "busycontacts"

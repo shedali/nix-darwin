@@ -58,6 +58,7 @@
       "nikitabobko/tap"
     ];
     brews = [
+      "flock"
       "gh"
       "git-lfs"
       "mas"
@@ -65,7 +66,6 @@
     casks = [
       "1password"
       "aerospace"
-      "flock"
       "ghostty"
       "google-chrome"
       "obsidian"
