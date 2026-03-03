@@ -13,6 +13,18 @@
     };
   };
 
+  # Launch Ollama server automatically
+  launchd.user.agents.ollama = {
+    path = [ "/opt/homebrew/bin" ];
+    serviceConfig = {
+      ProgramArguments = [ "/opt/homebrew/bin/ollama" "serve" ];
+      KeepAlive = true;
+      RunAtLoad = true;
+      StandardErrorPath = "/tmp/ollama.err.log";
+      StandardOutPath = "/tmp/ollama.out.log";
+    };
+  };
+
   # Personal Homebrew configuration
   homebrew = {
     enable = true;

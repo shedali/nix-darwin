@@ -44,19 +44,6 @@
     };
   };
 
-  # Launch Syncthing automatically
-  launchd.user.agents.syncthing = {
-    path = [ "/opt/homebrew/bin" ];
-    serviceConfig = {
-      ProgramArguments = [ "/opt/homebrew/bin/syncthing" "serve" ];
-      KeepAlive = true;
-      RunAtLoad = true;
-      ProcessType = "Background";
-      StandardErrorPath = "/tmp/syncthing.err.log";
-      StandardOutPath = "/tmp/syncthing.out.log";
-    };
-  };
-
   # Work Homebrew configuration - minimal set for work
   homebrew = {
     enable = true;
@@ -74,7 +61,6 @@
       "gh"
       "git-lfs"
       "mas"
-      "syncthing"
     ];
 
     casks = [
@@ -83,7 +69,6 @@
       "ghostty"
       "google-chrome"
       "slack"
-      "visual-studio-code"
     ];
 
     masApps = {
