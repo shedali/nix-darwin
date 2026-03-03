@@ -42,6 +42,8 @@
       "aichat"
       "ollama"
       "syncthing"
+      "tinymist"
+      "typst"
       "zeroclaw"
     ];
 
