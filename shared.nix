@@ -8,7 +8,10 @@
   # System defaults - common across all profiles
   system.defaults = {
     dock.autohide = false;
-    dock.persistent-apps = [ "/Applications/Terminal.app" ];
+    dock.persistent-apps = [
+      "/Applications/Things3.app"
+      "/Applications/OmniFocus.app"
+    ];
     finder.ShowPathbar = true;
     finder.ShowStatusBar = true;
     screencapture.location = "~/Pictures/Screenshots";

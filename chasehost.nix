@@ -103,7 +103,9 @@
   # Chase host dock settings
   system.defaults.dock.persistent-apps = [
     "/Applications/Ghostty.app"
-    "/Applications/Slack.app"
+    "/Applications/Things3.app"
+    "/Applications/OmniFocus.app"
+    "/Applications/Island.app"
     "/Applications/Google Chrome.app"
   ];
 }
