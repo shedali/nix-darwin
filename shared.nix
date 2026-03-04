@@ -82,6 +82,7 @@
       "flock"
       "gh"
       "git-lfs"
+      "llmfit"
       "mas"
       "things.sh"
     ];

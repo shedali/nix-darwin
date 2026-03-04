@@ -96,6 +96,7 @@
     casks = [
       "airfoil"
       "antigravity"
+      "atuin-desktop"
       "alfred"
       "audio-hijack"
       "autodesk-fusion"

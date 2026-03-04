@@ -60,6 +60,7 @@
       "acli"
       "gh"
       "git-lfs"
+      "llmfit"
       "mas"
     ];
 

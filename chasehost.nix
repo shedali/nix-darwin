@@ -76,6 +76,7 @@
     casks = [
       "alfred"
       "antigravity"
+      "atuin-desktop"
       "bambu-studio"
       "betterdisplay"
       "chatgpt"

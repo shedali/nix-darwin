@@ -61,7 +61,6 @@
       "nullclaw/nullclaw/nullclaw"
       "ollama"
       "homeassistant-cli"
-      "llmfit"
       "ical-buddy"
       "openclaw-cli"
       "openhue/cli/openhue-cli"
