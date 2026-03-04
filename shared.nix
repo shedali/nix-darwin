@@ -75,6 +75,7 @@
   # Shared Homebrew apps across all profiles
   homebrew = {
     taps = [
+      "alexanderwillner/tap"
       "nikitabobko/tap"
     ];
     brews = [
@@ -82,6 +83,7 @@
       "gh"
       "git-lfs"
       "mas"
+      "things.sh"
     ];
     casks = [
       "1password"
