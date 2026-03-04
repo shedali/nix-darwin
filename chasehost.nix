@@ -38,6 +38,18 @@
     };
   };
 
+  # Espanso text expander - launcher spawns daemon then exits
+  launchd.user.agents.espanso = {
+    path = [ "/opt/homebrew/bin" ];
+    serviceConfig = {
+      ProgramArguments = [ "/opt/homebrew/bin/espanso" "launcher" ];
+      KeepAlive = false;
+      RunAtLoad = true;
+      StandardErrorPath = "/tmp/espanso.err.log";
+      StandardOutPath = "/tmp/espanso.out.log";
+    };
+  };
+
   # Chase Host Homebrew configuration
   homebrew = {
     enable = true;
@@ -84,6 +96,7 @@
       "slack"
       "telegram"
       "termius"
+      "espanso"
       "zoom"
     ];
 
