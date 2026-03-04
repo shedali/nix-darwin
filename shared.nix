@@ -21,10 +21,27 @@
     CustomUserPreferences = {
       "com.apple.symbolichotkeys" = {
         AppleSymbolicHotKeys = {
+          # Cmd+` for "Move focus to next window"
           "27" = {
             enabled = true;
             value = {
               parameters = [ 96 50 1048576 ];
+              type = "standard";
+            };
+          };
+          # Disable Spotlight search (Cmd+Space)
+          "64" = {
+            enabled = false;
+            value = {
+              parameters = [ 32 49 1048576 ];
+              type = "standard";
+            };
+          };
+          # Disable Finder search window (Cmd+Option+Space)
+          "65" = {
+            enabled = false;
+            value = {
+              parameters = [ 32 49 1572864 ];
               type = "standard";
             };
           };
