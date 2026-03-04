@@ -54,9 +54,11 @@
       "openhue/cli"
       "steipete/tap"
       "yakitrak/yakitrak"
+      "nullclaw/nullclaw"
     ];
 
     brews = [
+      "nullclaw/nullclaw/nullclaw"
       "ollama"
       "homeassistant-cli"
       "llmfit"
