@@ -92,7 +92,7 @@
       "tinymist"
       "typst"
       "ubuntu/microk8s/microk8s"
-      "polymarket-cli"
+      "polymarket"
       "yt-dlp"
       "zeroclaw"
     ];

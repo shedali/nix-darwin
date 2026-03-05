@@ -73,7 +73,7 @@
       "syncthing"
       "tinymist"
       "typst"
-      "polymarket-cli"
+      "polymarket"
       "zeroclaw"
     ];
 
