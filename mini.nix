@@ -58,6 +58,7 @@
     ];
 
     brews = [
+      "agent-browser"
       "nullclaw/nullclaw/nullclaw"
       "ollama"
       "homeassistant-cli"

@@ -71,6 +71,7 @@
     ];
 
     brews = [
+      "agent-browser"
       "acli"
       "aichat"
       "appleboy/tap/codegpt"

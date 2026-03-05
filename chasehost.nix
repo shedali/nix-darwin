@@ -62,6 +62,7 @@
     ];
 
     brews = [
+      "agent-browser"
       "acli"
       "aichat"
       "ollama"
