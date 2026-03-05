@@ -13,6 +13,21 @@
     };
   };
 
+  # Launch NullClaw gateway (disabled — re-enable when needed)
+  # launchd.user.agents.nullclaw = {
+  #   path = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" ];
+  #   serviceConfig = {
+  #     ProgramArguments = [ "/opt/homebrew/bin/nullclaw" "gateway" ];
+  #     KeepAlive = true;
+  #     RunAtLoad = true;
+  #     EnvironmentVariables = {
+  #       HOME = "/Users/franz";
+  #     };
+  #     StandardErrorPath = "/Users/franz/.nullclaw/logs/daemon.stderr.log";
+  #     StandardOutPath = "/Users/franz/.nullclaw/logs/daemon.stdout.log";
+  #   };
+  # };
+
   # Launch Ollama server automatically
   launchd.user.agents.ollama = {
     path = [ "/opt/homebrew/bin" ];
@@ -43,6 +58,60 @@
     /bin/launchctl start org.cups.cupsd
   '';
 
+  # Grant TCC permissions to NullClaw binary for shell tool access (osascript, calendar, etc.)
+  system.activationScripts.nullclawTcc.text = ''
+    echo "Granting TCC permissions to NullClaw binary..."
+    NC_BIN=$(/usr/bin/readlink -f /opt/homebrew/bin/nullclaw 2>/dev/null || echo /opt/homebrew/bin/nullclaw)
+    TCC_DB="/Users/franz/Library/Application Support/com.apple.TCC/TCC.db"
+    NOW=$(date +%s)
+
+    for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+      /usr/bin/sqlite3 "$TCC_DB" \
+        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
+         VALUES ('$SERVICE', '$NC_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);"
+    done
+
+    for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
+      /usr/bin/sqlite3 "$TCC_DB" \
+        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
+         VALUES ('kTCCServiceAppleEvents', '$NC_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);"
+    done
+
+    /usr/bin/sqlite3 "$TCC_DB" \
+      "DELETE FROM access WHERE client LIKE '%/Cellar/nullclaw/%' AND client <> '$NC_BIN';"
+
+    echo "TCC permissions granted for $NC_BIN"
+  '';
+
+  # Grant TCC permissions to current node binary for OpenClaw
+  # Runs on every darwin-rebuild switch to handle Homebrew node version changes
+  system.activationScripts.openclawTcc.text = ''
+    echo "Granting TCC permissions to current node binary for OpenClaw..."
+    NODE_BIN=$(/usr/bin/readlink -f /opt/homebrew/opt/node/bin/node 2>/dev/null || echo /opt/homebrew/opt/node/bin/node)
+    TCC_DB="/Users/franz/Library/Application Support/com.apple.TCC/TCC.db"
+    NOW=$(date +%s)
+
+    # Direct service permissions (Contacts, Calendar, Reminders)
+    for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+      /usr/bin/sqlite3 "$TCC_DB" \
+        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
+         VALUES ('$SERVICE', '$NODE_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);"
+    done
+
+    # AppleEvents permissions (per-target app)
+    for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.apple.Photos com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
+      /usr/bin/sqlite3 "$TCC_DB" \
+        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
+         VALUES ('kTCCServiceAppleEvents', '$NODE_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);"
+    done
+
+    # Clean stale entries from old node versions
+    /usr/bin/sqlite3 "$TCC_DB" \
+      "DELETE FROM access WHERE client LIKE '%/Cellar/node/%' AND client <> '$NODE_BIN';"
+
+    echo "✓ TCC permissions granted for $NODE_BIN (old entries cleaned)"
+  '';
+
   # Mac Mini Homebrew configuration - minimal server/utility setup
   homebrew = {
     enable = true;
@@ -60,6 +129,7 @@
     brews = [
       "agent-browser"
       "nullclaw/nullclaw/nullclaw"
+      "nullclaw"
       "ollama"
       "homeassistant-cli"
       "ical-buddy"
