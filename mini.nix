@@ -123,12 +123,10 @@
       "openhue/cli"
       "steipete/tap"
       "yakitrak/yakitrak"
-      "nullclaw/nullclaw"
     ];
 
     brews = [
       "agent-browser"
-      "nullclaw/nullclaw/nullclaw"
       "nullclaw"
       "ollama"
       "homeassistant-cli"
