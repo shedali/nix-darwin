@@ -68,6 +68,10 @@
       "vitorgalvao/tiny-scripts"
       "wix/brew"
       "yulrizka/tap"
+      {
+        name = "Polymarket/polymarket-cli";
+        clone_target = "https://github.com/Polymarket/polymarket-cli";
+      }
     ];
 
     brews = [
@@ -88,6 +92,7 @@
       "tinymist"
       "typst"
       "ubuntu/microk8s/microk8s"
+      "polymarket-cli"
       "yt-dlp"
       "zeroclaw"
     ];

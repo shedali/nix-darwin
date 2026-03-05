@@ -59,6 +59,10 @@
 
     taps = [
       "atlassian/homebrew-acli"
+      {
+        name = "Polymarket/polymarket-cli";
+        clone_target = "https://github.com/Polymarket/polymarket-cli";
+      }
     ];
 
     brews = [
@@ -69,6 +73,7 @@
       "syncthing"
       "tinymist"
       "typst"
+      "polymarket-cli"
       "zeroclaw"
     ];
 

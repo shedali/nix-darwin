@@ -84,7 +84,9 @@
       "git-lfs"
       "llmfit"
       "mas"
-      "things.sh"
+      "rtk"
+      "worktrunk"
+      "alexanderwillner/tap/things.sh"
     ];
     casks = [
       "1password"
