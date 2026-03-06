@@ -84,7 +84,7 @@
       "ipsw"
       "mas"
       "python@3.12"
-      "syncthing"
+      # "syncthing"  # commented out — not needed on macbook
       "tinymist"
       "typst"
       "ubuntu/microk8s/microk8s"
