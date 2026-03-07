@@ -28,6 +28,23 @@
   #   };
   # };
 
+  # Claude Code Telegram bot
+  launchd.user.agents.claude-telegram = {
+    path = [ "/opt/homebrew/bin" "/usr/local/bin" "/usr/bin" "/bin" "/Users/franz/.local/bin" "/Users/franz/.nix-profile/bin" ];
+    serviceConfig = {
+      ProgramArguments = [ "/Users/franz/.local/bin/claude-telegram-bot" ];
+      KeepAlive = true;
+      RunAtLoad = true;
+      WorkingDirectory = "/Users/franz/.claude-telegram";
+      EnvironmentVariables = {
+        HOME = "/Users/franz";
+      };
+      StandardErrorPath = "/Users/franz/.claude-telegram/stderr.log";
+      StandardOutPath = "/Users/franz/.claude-telegram/stdout.log";
+    };
+  };
+
+
   # Launch Ollama server automatically
   launchd.user.agents.ollama = {
     path = [ "/opt/homebrew/bin" ];
