@@ -103,6 +103,19 @@
     };
   };
 
+  # Obsidian headless sync (continuous background sync for CLI/nvim editing)
+  launchd.user.agents.obsidian-sync = {
+    path = [ "/opt/homebrew/bin" "/usr/local/bin" "/usr/bin" "/bin" ];
+    serviceConfig = {
+      ProgramArguments = [ "/opt/homebrew/bin/ob" "sync" "--path" "/Users/franz/dev/shedali/knowledge" "--continuous" ];
+      KeepAlive = true;
+      RunAtLoad = true;
+      EnvironmentVariables = { HOME = "/Users/franz"; };
+      StandardErrorPath = "/tmp/obsidian-sync.err.log";
+      StandardOutPath = "/tmp/obsidian-sync.out.log";
+    };
+  };
+
   # Set Git commit hash for darwin-version
   system.configurationRevision = null;
 
