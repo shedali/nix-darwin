@@ -70,6 +70,7 @@
       "ghostty"
       "google-chrome"
       "slack"
+      "warp"
     ];
 
     masApps = {

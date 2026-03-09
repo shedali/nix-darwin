@@ -183,6 +183,7 @@
       "typeless"
       "utm"
       "visual-studio-code"
+      "warp"
       "wispr-flow"
       "zoom"
     ];
