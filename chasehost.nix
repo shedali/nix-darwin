@@ -84,6 +84,7 @@
       "cleanshot"
       "claude"
       "codex-app"
+      "warp"
       "devonthink"
       "discord"
       "dropbox"
