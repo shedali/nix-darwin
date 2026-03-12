@@ -92,6 +92,7 @@
       "google-drive"
       "hammerspoon"
       "keyboard-maestro"
+      "opencode-desktop"
       "orbstack"
       "claude-island"
       "parallels"

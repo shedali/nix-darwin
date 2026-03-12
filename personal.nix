@@ -152,6 +152,7 @@
       "notion"
       "numi"
       "opera@beta"
+      "opencode-desktop"
       "orbstack"
       "parallels"
       "path-finder"
