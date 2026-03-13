@@ -91,6 +91,7 @@
       "ghostty"
       "google-chrome"
       "obsidian"
+      "qlvideo"
       "raycast"
     ];
     masApps = {
