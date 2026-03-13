@@ -4,6 +4,20 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Override tdarr-node to match server version (avoids auto-update loop on read-only nix store)
+  nixpkgs.overlays = [
+    (final: prev: {
+      tdarr-node = prev.tdarr-node.overrideAttrs (_finalAttrs: _oldAttrs: {
+        version = "2.62.01";
+        src = prev.fetchzip {
+          url = "https://storage.tdarr.io/versions/2.62.01/darwin_arm64/Tdarr_Node.zip";
+          hash = "sha256-i7GS+Y9P+q/kdg37Qq6KuKGQz4Cv9F/VDAVTZy/DIuA=";
+          stripRoot = false;
+        };
+      });
+    })
+  ];
+
   # Set primary user for user-specific settings
   system.primaryUser = "franz";
 
