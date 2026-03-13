@@ -2,6 +2,8 @@
   # Disable nix-darwin's Nix management (using Determinate Nix)
   nix.enable = false;
 
+  nixpkgs.config.allowUnfree = true;
+
   # Set primary user for user-specific settings
   system.primaryUser = "franz";
 

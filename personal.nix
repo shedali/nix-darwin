@@ -41,6 +41,25 @@
     };
   };
 
+  # Tdarr distributed transcoding worker node (native binary for VideoToolbox GPU acceleration)
+  launchd.user.agents.tdarr-node = {
+    serviceConfig = {
+      ProgramArguments = [ "${pkgs.tdarr-node}/bin/Tdarr_Node" ];
+      WorkingDirectory = "/Users/franz/.local/share/tdarr-node";
+      EnvironmentVariables = {
+        serverIP = "192.168.0.72";
+        serverPort = "8266";
+        nodeName = "personal-mac";
+        ffmpegPath = "${pkgs.ffmpeg}/bin/ffmpeg";
+      };
+      KeepAlive = true;
+      RunAtLoad = true;
+      ThrottleInterval = 30;
+      StandardErrorPath = "/tmp/tdarr-node.err.log";
+      StandardOutPath = "/tmp/tdarr-node.out.log";
+    };
+  };
+
   # Personal Homebrew configuration
   homebrew = {
     enable = true;
