@@ -96,6 +96,7 @@
       "orbstack"
       "claude-island"
       "parallels"
+      "plexamp"
       "rocket"
       "slack"
       "telegram"
