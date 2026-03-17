@@ -102,6 +102,7 @@
       "telegram"
       "termius"
       "espanso"
+      "losslesscut"
       "zoom"
     ];
 
