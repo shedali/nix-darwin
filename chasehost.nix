@@ -59,13 +59,14 @@
 
     taps = [
       "atlassian/homebrew-acli"
+      "manaflow-ai/cmux"
     ];
 
     brews = [
       "agent-browser"
       "acli"
       "aichat"
-      "cmux"
+      "manaflow-ai/cmux/cmux"
       "ollama"
       "syncthing"
       "tinymist"
