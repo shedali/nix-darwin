@@ -93,6 +93,7 @@
       "agent-browser"
       "acli"
       "aichat"
+      "cmux"
       "appleboy/tap/codegpt"
       "mods"
       "ollama"

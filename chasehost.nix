@@ -65,6 +65,7 @@
       "agent-browser"
       "acli"
       "aichat"
+      "cmux"
       "ollama"
       "syncthing"
       "tinymist"
