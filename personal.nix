@@ -1,5 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  screenpipe = pkgs.callPackage ./packages/screenpipe.nix { };
+in
+{
   imports = [ ./shared.nix ];
+
+  environment.systemPackages = [ screenpipe ];
 
   # Espanso text expander - launcher spawns daemon then exits
   launchd.user.agents.espanso = {
