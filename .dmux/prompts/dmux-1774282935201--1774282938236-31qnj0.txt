@@ -1,0 +1,1 @@
+ensure cmux is added to personal and chasehost profiles 

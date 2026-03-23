@@ -1,0 +1,1 @@
+I would like to create or edit my dmux hooks in .dmux-hooks. Please read AGENTS.md or CLAUDE.md first, then ask me what I want to create or modify.
