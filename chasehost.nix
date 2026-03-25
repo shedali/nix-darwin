@@ -66,7 +66,6 @@
       "agent-browser"
       "acli"
       "aichat"
-      "manaflow-ai/cmux/cmux"
       "ollama"
       "syncthing"
       "tinymist"
@@ -77,6 +76,7 @@
     # Chasehost-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
+      "manaflow-ai/cmux/cmux"
       "alfred"
       "antigravity"
       "atuin-desktop"
@@ -96,10 +96,10 @@
       "keyboard-maestro"
       "opencode-desktop"
       "orbstack"
-      "claude-island"
       "parallels"
       "plexamp"
       "rocket"
+      "screens-connect"
       "slack"
       "telegram"
       "termius"
