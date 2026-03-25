@@ -77,6 +77,7 @@ in
     taps = [
       "appleboy/tap"
       "atlassian/homebrew-acli"
+      "manaflow-ai/cmux"
       "aws/tap"
       "bbc/audiowaveform"
       "dart-lang/dart"
@@ -99,7 +100,6 @@ in
       "agent-browser"
       "acli"
       "aichat"
-      "cmux"
       "appleboy/tap/codegpt"
       "mods"
       "ollama"
@@ -121,6 +121,7 @@ in
     # Personal casks (1password, aerospace, ghostty, google-chrome, obsidian, raycast come from shared.nix)
     # masApps: Drafts, Spark, Things come from shared.nix
     casks = [
+      "manaflow-ai/cmux/cmux"
       "airfoil"
       "antigravity"
       "atuin-desktop"
@@ -135,7 +136,6 @@ in
       "chatgpt"
       "chatgpt-atlas"
       "claude"
-      "claude-island"
       "codex-app"
       "cleanshot"
       "cursor"
@@ -196,6 +196,7 @@ in
       "resilio-sync"
       "rocket"
       "responsively"
+      "screens-connect"
       "screenflow"
       "signal"
       "slack"

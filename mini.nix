@@ -183,6 +183,7 @@
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
       "bluebubbles"
+      "screens-connect"
       "openclaw"
       "utm"
     ];
