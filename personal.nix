@@ -99,6 +99,7 @@ in
     brews = [
       "agent-browser"
       "acli"
+      "cloudflared"
       "aichat"
       "appleboy/tap/codegpt"
       "mods"

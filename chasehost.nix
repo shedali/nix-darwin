@@ -65,6 +65,7 @@
     brews = [
       "agent-browser"
       "acli"
+      "cloudflared"
       "aichat"
       "ollama"
       "syncthing"
