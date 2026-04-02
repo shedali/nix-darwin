@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Prowlarr",
+    "type": "http",
+    "url": "http://192.168.0.72:9696",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Indexer manager for *arr stack - CRITICAL: no downloads without this"
+  },
+  {
+    "name": "Radarr",
+    "type": "http",
+    "url": "http://192.168.0.72:8310",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Movie management and download automation"
+  },
+  {
+    "name": "Sonarr",
+    "type": "http",
+    "url": "http://192.168.0.72:8989",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "TV show management and download automation"
+  },
+  {
+    "name": "Lidarr",
+    "type": "http",
+    "url": "http://192.168.0.72:8686",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Music management and download automation"
+  },
+  {
+    "name": "SABnzbd",
+    "type": "http",
+    "url": "http://192.168.0.72:8080",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Usenet download client - CRITICAL: downloads require this"
+  },
+  {
+    "name": "Transmission",
+    "type": "http",
+    "url": "http://192.168.0.72:9091",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "accepted_statuscodes": ["200-299", "401"],
+    "description": "Torrent download client (401 is valid - requires auth)"
+  },
+  {
+    "name": "Plex",
+    "type": "http",
+    "url": "http://192.168.0.72:32400/web",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Media server for streaming content"
+  },
+  {
+    "name": "Tautulli",
+    "type": "http",
+    "url": "http://192.168.0.72:8181",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Plex monitoring and statistics"
+  },
+  {
+    "name": "Audiobookshelf",
+    "type": "http",
+    "url": "http://192.168.0.72:13378",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Audiobook and podcast server"
+  },
+  {
+    "name": "Jellyfin",
+    "type": "http",
+    "url": "http://192.168.0.72:8096",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Media streaming server"
+  },
+  {
+    "name": "Seer",
+    "type": "http",
+    "url": "http://192.168.0.72:5055",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Media request and discovery management"
+  },
+  {
+    "name": "Home Assistant",
+    "type": "http",
+    "url": "http://192.168.0.117:8123",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Home Assistant automation platform"
+  },
+  {
+    "name": "Music Assistant",
+    "type": "http",
+    "url": "http://192.168.0.117:8095",
+    "interval": 60,
+    "retryInterval": 60,
+    "maxretries": 3,
+    "active": true,
+    "notificationIDList": {},
+    "description": "Music Assistant server"
+  }
+]

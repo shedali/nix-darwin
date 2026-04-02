@@ -1,6 +1,80 @@
 { pkgs, ... }: {
   imports = [ ./shared.nix ];
 
+  # Install uptime-kuma v1.23.16 via git clone into a persistent directory.
+  # Uses node@20 (node@22+ drops APIs uptime-kuma v1 depends on).
+  # npm registry only has broken v2-dev; nixpkgs version is marked broken.
+  # Also installs provision script dependencies.
+  system.activationScripts.uptimeKumaInstall.text = ''
+    INSTALL_DIR="/Users/franz/.local/share/uptime-kuma-app"
+    PROVISION_DIR="/Users/franz/dev/shedali/nix-darwin/uptime-kuma"
+    NODE="/opt/homebrew/opt/node@20/bin/node"
+    NPM="/opt/homebrew/opt/node@20/bin/npm"
+    GIT="/usr/bin/git"
+    export PATH="/opt/homebrew/opt/node@20/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+
+    if [ ! -f "$INSTALL_DIR/server/server.js" ]; then
+      echo "Cloning uptime-kuma v1.23.16..."
+      rm -rf "$INSTALL_DIR"
+      $GIT clone --depth 1 --branch 1.23.16 https://github.com/louislam/uptime-kuma.git "$INSTALL_DIR" 2>&1 || echo "WARNING: git clone had errors"
+      echo "Installing uptime-kuma dependencies..."
+      cd "$INSTALL_DIR"
+      $NPM install --production 2>&1 || echo "WARNING: npm install had errors"
+      echo "Downloading pre-built frontend..."
+      $NODE extra/download-dist.js 2>&1 || echo "WARNING: download-dist had errors"
+    fi
+
+    if [ ! -d "$PROVISION_DIR/node_modules/socket.io-client" ]; then
+      echo "Installing provision script dependencies..."
+      cd "$PROVISION_DIR"
+      $NPM install 2>&1 || echo "WARNING: provision deps install had errors"
+    fi
+  '';
+
+  # Uptime Kuma monitoring (independent of NAS — alerts still work during NAS rebuilds)
+  # Runs via git-cloned v1.23.16 with node@20 (required for compatibility).
+  launchd.user.agents.uptime-kuma = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/opt/homebrew/opt/node@20/bin/node"
+        "server/server.js"
+      ];
+      WorkingDirectory = "/Users/franz/.local/share/uptime-kuma-app";
+      EnvironmentVariables = {
+        DATA_DIR = "/Users/franz/.local/share/uptime-kuma";
+        UPTIME_KUMA_HOST = "0.0.0.0";
+        UPTIME_KUMA_PORT = "3001";
+        HOME = "/Users/franz";
+      };
+      KeepAlive = true;
+      RunAtLoad = true;
+      ThrottleInterval = 30;
+      StandardErrorPath = "/tmp/uptime-kuma.err.log";
+      StandardOutPath = "/tmp/uptime-kuma.out.log";
+    };
+  };
+
+  # Provision monitors declaratively from nix-darwin/uptime-kuma/monitors.json.
+  # Runs at boot, waits for the service to be ready, then syncs any missing monitors.
+  # Credentials: op item "Uptime Kuma" in agents vault (username + password fields).
+  launchd.user.agents.uptime-kuma-provision = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/opt/homebrew/bin/node"
+        "/Users/franz/dev/shedali/nix-darwin/uptime-kuma/provision.mjs"
+      ];
+      EnvironmentVariables = {
+        HOME = "/Users/franz";
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin";
+      };
+      RunAtLoad = true;
+      KeepAlive = false;
+      ThrottleInterval = 3600;
+      StandardErrorPath = "/tmp/uptime-kuma-provision.err.log";
+      StandardOutPath = "/tmp/uptime-kuma-provision.out.log";
+    };
+  };
+
   # Launch AeroSpace automatically
   launchd.user.agents.aerospace = {
     path = [ "/usr/bin" "/usr/local/bin" ];
@@ -166,6 +240,7 @@
       "nullclaw"
       "ollama"
       "homeassistant-cli"
+      "node@20"
       "ical-buddy"
       "openclaw-cli"
       "openhue/cli/openhue-cli"
@@ -183,6 +258,7 @@
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
       "bluebubbles"
+      "claude-code"
       "screens-connect"
       "openclaw"
       "utm"

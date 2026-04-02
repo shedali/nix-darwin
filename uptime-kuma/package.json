@@ -1,0 +1,9 @@
+{
+  "name": "uptime-kuma-provision",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Declarative provisioning script for Uptime Kuma monitors",
+  "dependencies": {
+    "socket.io-client": "^4.8.1"
+  }
+}
