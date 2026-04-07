@@ -51,10 +51,7 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
-    taps = [
-      "atlassian/homebrew-acli"
-      "nikitabobko/tap"
-    ];
+    taps = [];
 
     brews = [
       "acli"

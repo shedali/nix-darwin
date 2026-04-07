@@ -106,6 +106,7 @@
             enableRosetta = false;
             user = "franz";
             autoMigrate = true;
+            mutableTaps = false;
             taps = {
               "atlassian/homebrew-acli" = atlassian-acli-tap;
               "nikitabobko/tap" = nikitabobko-tap;
