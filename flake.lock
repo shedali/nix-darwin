@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "atlassian-acli-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775043185,
+        "narHash": "sha256-1+D4zkvmBVnvIpjJYRTzq4AE3sBdMPc7b5b5YZrUusA=",
+        "owner": "atlassian",
+        "repo": "homebrew-acli",
+        "rev": "e5c170e78d06a5559245a605b4422f5f1fd984c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "atlassian",
+        "repo": "homebrew-acli",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -14,6 +30,38 @@
         "owner": "Homebrew",
         "ref": "5.0.12",
         "repo": "brew",
+        "type": "github"
+      }
+    },
+    "manaflow-cmux-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775471728,
+        "narHash": "sha256-AM1b9PPuhl+0UZNBuqY60Wq3figXGgOipbP1th8uZL8=",
+        "owner": "manaflow-ai",
+        "repo": "homebrew-cmux",
+        "rev": "6aed04e54c51b3bab77ce1caff54fc70bf058282",
+        "type": "github"
+      },
+      "original": {
+        "owner": "manaflow-ai",
+        "repo": "homebrew-cmux",
+        "type": "github"
+      }
+    },
+    "nikitabobko-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773014271,
+        "narHash": "sha256-FTE1he09SKkm7e4W4wwuhoBSgM3zROlRYcjZiU7Yjsg=",
+        "owner": "nikitabobko",
+        "repo": "homebrew-tap",
+        "rev": "db2dcd4d2fd7087457b3cc0baf597880ac4e35a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nikitabobko",
+        "repo": "homebrew-tap",
         "type": "github"
       }
     },
@@ -73,6 +121,9 @@
     },
     "root": {
       "inputs": {
+        "atlassian-acli-tap": "atlassian-acli-tap",
+        "manaflow-cmux-tap": "manaflow-cmux-tap",
+        "nikitabobko-tap": "nikitabobko-tap",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs"
