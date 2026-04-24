@@ -75,18 +75,6 @@
     };
   };
 
-  # Launch AeroSpace automatically
-  launchd.user.agents.aerospace = {
-    path = [ "/usr/bin" "/usr/local/bin" ];
-    serviceConfig = {
-      ProgramArguments = [ "/Applications/AeroSpace.app/Contents/MacOS/AeroSpace" ];
-      KeepAlive = true;
-      RunAtLoad = true;
-      StandardErrorPath = "/tmp/aerospace.err.log";
-      StandardOutPath = "/tmp/aerospace.out.log";
-    };
-  };
-
   # Launch NullClaw gateway (disabled — re-enable when needed)
   # launchd.user.agents.nullclaw = {
   #   path = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" ];

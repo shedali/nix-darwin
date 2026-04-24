@@ -1,18 +1,6 @@
 { pkgs, ... }: {
   imports = [ ./shared.nix ];
 
-  # Launch AeroSpace automatically
-  launchd.user.agents.aerospace = {
-    path = [ "/usr/bin" "/usr/local/bin" ];
-    serviceConfig = {
-      ProgramArguments = [ "/Applications/AeroSpace.app/Contents/MacOS/AeroSpace" ];
-      KeepAlive = true;
-      RunAtLoad = true;
-      StandardErrorPath = "/tmp/aerospace.err.log";
-      StandardOutPath = "/tmp/aerospace.out.log";
-    };
-  };
-
   # Launch Ollama server automatically
   launchd.user.agents.ollama = {
     path = [ "/opt/homebrew/bin" ];
