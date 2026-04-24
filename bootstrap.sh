@@ -35,10 +35,8 @@ echo "==> Checking Nix..."
 NIX_DAEMON="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 NIX_BIN="/nix/var/nix/profiles/default/bin/nix"
 
-if command -v nix &>/dev/null; then
+if command -v nix &>/dev/null || [ -f "$NIX_BIN" ] || [ -d "/nix/store" ]; then
     echo "  ✓ Nix already installed, skipping"
-elif [ -f "$NIX_BIN" ]; then
-    echo "  ✓ Nix installed but not in PATH, sourcing daemon..."
     # shellcheck disable=SC1090
     [ -f "$NIX_DAEMON" ] && . "$NIX_DAEMON"
 else
