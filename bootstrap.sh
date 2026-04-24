@@ -72,6 +72,7 @@ HM_DIR="$HOME/.config/home-manager"
 
 if [ -d "$HM_DIR/.git" ]; then
     echo "  Updating existing home-manager repo..."
+    git -C "$HM_DIR" remote set-url origin git@github.com:shedali/home-manager.git
     git -C "$HM_DIR" pull --ff-only || echo "  ⚠ Could not pull latest (SSH key not set up?), using existing"
 else
     echo "  Cloning home-manager repo..."
