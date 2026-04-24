@@ -60,7 +60,7 @@
   launchd.user.agents.uptime-kuma-provision = {
     serviceConfig = {
       ProgramArguments = [
-        "/opt/homebrew/bin/node"
+        "/opt/homebrew/opt/node@20/bin/node"
         "/Users/franz/dev/shedali/nix-darwin/uptime-kuma/provision.mjs"
       ];
       EnvironmentVariables = {
