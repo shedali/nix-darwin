@@ -163,22 +163,38 @@
     TCC_DB="/Users/franz/Library/Application Support/com.apple.TCC/TCC.db"
     NOW=$(date +%s)
 
-    for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+    if [ ! -f "$TCC_DB" ]; then
+      echo "WARNING: TCC database not found at $TCC_DB — skipping NullClaw TCC grants"
+    else
+      FAILED=0
+
+      for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+        if ! /usr/bin/sqlite3 "$TCC_DB" \
+          "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
+           VALUES ('$SERVICE', '$NC_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);" 2>/dev/null; then
+          echo "WARNING: Failed to grant $SERVICE to NullClaw (SIP or schema mismatch?)"
+          FAILED=1
+        fi
+      done
+
+      for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
+        if ! /usr/bin/sqlite3 "$TCC_DB" \
+          "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
+           VALUES ('kTCCServiceAppleEvents', '$NC_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);" 2>/dev/null; then
+          echo "WARNING: Failed to grant AppleEvents/$TARGET to NullClaw"
+          FAILED=1
+        fi
+      done
+
       /usr/bin/sqlite3 "$TCC_DB" \
-        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
-         VALUES ('$SERVICE', '$NC_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);"
-    done
+        "DELETE FROM access WHERE client LIKE '%/Cellar/nullclaw/%' AND client <> '$NC_BIN';" 2>/dev/null || true
 
-    for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
-      /usr/bin/sqlite3 "$TCC_DB" \
-        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
-         VALUES ('kTCCServiceAppleEvents', '$NC_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);"
-    done
-
-    /usr/bin/sqlite3 "$TCC_DB" \
-      "DELETE FROM access WHERE client LIKE '%/Cellar/nullclaw/%' AND client <> '$NC_BIN';"
-
-    echo "TCC permissions granted for $NC_BIN"
+      if [ "$FAILED" -eq 0 ]; then
+        echo "✓ TCC permissions granted for $NC_BIN"
+      else
+        echo "WARNING: Some TCC grants failed — manual intervention may be required"
+      fi
+    fi
   '';
 
   # Grant TCC permissions to current node binary for OpenClaw
@@ -189,25 +205,41 @@
     TCC_DB="/Users/franz/Library/Application Support/com.apple.TCC/TCC.db"
     NOW=$(date +%s)
 
-    # Direct service permissions (Contacts, Calendar, Reminders)
-    for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+    if [ ! -f "$TCC_DB" ]; then
+      echo "WARNING: TCC database not found at $TCC_DB — skipping OpenClaw TCC grants"
+    else
+      FAILED=0
+
+      # Direct service permissions (Contacts, Calendar, Reminders)
+      for SERVICE in kTCCServiceAddressBook kTCCServiceCalendar kTCCServiceReminders; do
+        if ! /usr/bin/sqlite3 "$TCC_DB" \
+          "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
+           VALUES ('$SERVICE', '$NODE_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);" 2>/dev/null; then
+          echo "WARNING: Failed to grant $SERVICE to node (SIP or schema mismatch?)"
+          FAILED=1
+        fi
+      done
+
+      # AppleEvents permissions (per-target app)
+      for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.apple.Photos com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
+        if ! /usr/bin/sqlite3 "$TCC_DB" \
+          "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
+           VALUES ('kTCCServiceAppleEvents', '$NODE_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);" 2>/dev/null; then
+          echo "WARNING: Failed to grant AppleEvents/$TARGET to node"
+          FAILED=1
+        fi
+      done
+
+      # Clean stale entries from old node versions
       /usr/bin/sqlite3 "$TCC_DB" \
-        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, flags, last_modified) \
-         VALUES ('$SERVICE', '$NODE_BIN', 1, 2, 2, 1, NULL, 'UNUSED', 0, $NOW);"
-    done
+        "DELETE FROM access WHERE client LIKE '%/Cellar/node/%' AND client <> '$NODE_BIN';" 2>/dev/null || true
 
-    # AppleEvents permissions (per-target app)
-    for TARGET in com.apple.AddressBook com.apple.iCal com.apple.reminders com.apple.MobileSMS com.apple.mail com.apple.Notes com.apple.Photos com.culturedcode.ThingsMac com.omnigroup.OmniFocus4; do
-      /usr/bin/sqlite3 "$TCC_DB" \
-        "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, csreq, indirect_object_identifier, indirect_object_identifier_type, flags, last_modified) \
-         VALUES ('kTCCServiceAppleEvents', '$NODE_BIN', 1, 2, 3, 1, NULL, '$TARGET', 0, 0, $NOW);"
-    done
-
-    # Clean stale entries from old node versions
-    /usr/bin/sqlite3 "$TCC_DB" \
-      "DELETE FROM access WHERE client LIKE '%/Cellar/node/%' AND client <> '$NODE_BIN';"
-
-    echo "✓ TCC permissions granted for $NODE_BIN (old entries cleaned)"
+      if [ "$FAILED" -eq 0 ]; then
+        echo "✓ TCC permissions granted for $NODE_BIN (old entries cleaned)"
+      else
+        echo "WARNING: Some TCC grants failed — manual intervention may be required"
+      fi
+    fi
   '';
 
   # Mac Mini Homebrew configuration - minimal server/utility setup
