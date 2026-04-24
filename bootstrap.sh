@@ -4,7 +4,7 @@ set -e
 # Bootstrap script for nix-darwin installation
 # Usage: curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- <profile>
 
-VALID_PROFILES="personal work mini air"
+VALID_PROFILES="personal work mini air chasevm chasehost"
 PROFILE="${1:-personal}"
 
 # Validate profile
@@ -37,7 +37,8 @@ fi
 
 # Bootstrap nix-darwin
 echo "Bootstrapping nix-darwin..."
-sudo nix run nix-darwin -- switch --flake "github:shedali/nix-darwin#${PROFILE}"
+NIX_BIN=$(command -v nix || echo "/nix/var/nix/profiles/default/bin/nix")
+sudo "$NIX_BIN" run nix-darwin -- switch --flake "github:shedali/nix-darwin#${PROFILE}"
 
 echo ""
 echo "✓ nix-darwin installed successfully with profile: $PROFILE"
