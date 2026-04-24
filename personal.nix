@@ -106,10 +106,8 @@ in
       "ollama"
       "coreutils"
       "dash"
-      "gh"
       "homeassistant-cli"
       "ipsw"
-      "mas"
       "python@3.12"
       # "syncthing"  # commented out — not needed on macbook
       "tinymist"
@@ -222,7 +220,6 @@ in
       "Actions" = 1586435171;
       "Spark Classic" = 1176895641;
       "Black Out" = 1319884285;
-      "Cardhop" = 1290358394;
       "ColorSlurp" = 1287239339;
       "DaisyDisk" = 411643860;
       "djay Pro" = 450527929;
