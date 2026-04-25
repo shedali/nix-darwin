@@ -92,10 +92,16 @@ fi
 # ---------------------------------------------------------------------------
 echo ""
 echo "==> Applying home-manager config..."
+# Use profile-specific home-manager config if available
+HM_PROFILE="franz"
+if [ "$PROFILE" = "chasevm" ] || [ "$PROFILE" = "chasehost" ]; then
+    HM_PROFILE="franz-${PROFILE}"
+fi
+
 if command -v home-manager &>/dev/null; then
-    home-manager switch --flake "$HM_DIR"
+    home-manager switch --flake "$HM_DIR#$HM_PROFILE"
 else
-    "$NIX" run home-manager -- switch --flake "$HM_DIR"
+    "$NIX" run home-manager -- switch --flake "$HM_DIR#$HM_PROFILE"
 fi
 echo "  ✓ home-manager applied"
 
