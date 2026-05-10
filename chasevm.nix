@@ -1,6 +1,10 @@
-{ ... }: {
+{ pkgs, lib, ... }: {
   # Chase VM profile - for Chase virtual machines (standalone, does not import shared.nix)
   imports = [ ./base.nix ];
+
+  # Override base.nix packages — exclude neovim (its nixpkg fetches from npmjs, blocked by Netskope)
+  # neovim is installed via brew instead
+  environment.systemPackages = lib.mkForce [ pkgs.vim ];
 
   # Work Homebrew configuration - minimal set for work
   homebrew = {
@@ -17,6 +21,7 @@
       "git-lfs"
       "llmfit"
       "mas"
+      "neovim"
     ];
 
     casks = [
