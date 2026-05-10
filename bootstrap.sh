@@ -71,19 +71,17 @@ HM_DIR="$HOME/.config/home-manager"
 if [ -d "$HM_DIR/.git" ]; then
     echo "  Updating existing home-manager repo..."
     git -C "$HM_DIR" remote set-url origin git@github.com:shedali/home-manager.git
-    git -C "$HM_DIR" pull --ff-only || echo "  ⚠ Could not pull latest (SSH key not set up?), using existing"
+    if ! git -C "$HM_DIR" pull --ff-only 2>/dev/null; then
+        echo "  ⚠ Could not pull latest (SSH key not set up?), falling back to remote flake"
+        HM_DIR="github:shedali/home-manager"
+    fi
 else
     echo "  Cloning home-manager repo..."
     if git clone git@github.com:shedali/home-manager.git "$HM_DIR" 2>/dev/null; then
         echo "  ✓ Cloned home-manager"
     else
-        echo ""
-        echo "  ⚠ Could not clone via SSH. Set up SSH key (e.g. via 1Password agent) then run:"
-        echo "    git clone git@github.com:shedali/home-manager.git ~/.config/home-manager"
-        echo "    home-manager switch --flake ~/.config/home-manager"
-        echo ""
-        echo "  Skipping home-manager step."
-        exit 0
+        echo "  ⚠ Could not clone via SSH, falling back to remote flake"
+        HM_DIR="github:shedali/home-manager"
     fi
 fi
 
