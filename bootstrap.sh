@@ -62,27 +62,48 @@ sudo "$NIX" run nix-darwin -- switch --flake "github:shedali/nix-darwin#${PROFIL
 echo "  ✓ nix-darwin applied"
 
 # ---------------------------------------------------------------------------
-# 4. Clone or update home-manager config (via SSH)
+# 4. Authenticate GitHub and clone/update home-manager config (via HTTPS token)
 # ---------------------------------------------------------------------------
+# home-manager is a PRIVATE repo, and the SSH signing/auth keys are deployed *by*
+# home-manager — so we can't depend on an SSH key here (chicken-and-egg). Instead
+# pull in gh via nix, authenticate, and clone over HTTPS with the token.
 echo ""
 echo "==> Setting up home-manager config..."
 HM_DIR="$HOME/.config/home-manager"
+GH_TOKEN=""
 
-if [ -d "$HM_DIR/.git" ]; then
-    echo "  Updating existing home-manager repo..."
-    git -C "$HM_DIR" remote set-url origin git@github.com:shedali/home-manager.git
-    if ! git -C "$HM_DIR" pull --ff-only 2>/dev/null; then
-        echo "  ⚠ Could not pull latest (SSH key not set up?), falling back to remote flake"
-        HM_DIR="github:shedali/home-manager"
+# gh isn't installed yet on a fresh machine; run it from nixpkgs. Progress goes to
+# stderr so the captured stdout is just the token. gh auth login reads from the
+# terminal (/dev/tty) since this script may be piped via curl | bash.
+GH_TOKEN=$("$NIX" shell nixpkgs#gh nixpkgs#git --command bash -c '
+    set -e
+    HM_DIR="'"$HM_DIR"'"
+    if ! gh auth status &>/dev/null; then
+        echo "  Authenticating with GitHub..." >&2
+        gh auth login </dev/tty >&2
     fi
-else
-    echo "  Cloning home-manager repo..."
-    if git clone git@github.com:shedali/home-manager.git "$HM_DIR" 2>/dev/null; then
-        echo "  ✓ Cloned home-manager"
+    TOKEN=$(gh auth token 2>/dev/null)
+    [ -z "$TOKEN" ] && { echo "  ⚠ no gh token" >&2; exit 1; }
+    AUTH_HEADER="AUTHORIZATION: bearer $TOKEN"
+    if [ -d "$HM_DIR/.git" ]; then
+        echo "  Updating existing home-manager repo..." >&2
+        git -C "$HM_DIR" remote set-url origin https://github.com/shedali/home-manager.git
+        git -C "$HM_DIR" -c "http.https://github.com/.extraheader=$AUTH_HEADER" pull --ff-only >&2 \
+            || echo "  ⚠ Could not pull latest" >&2
     else
-        echo "  ⚠ Could not clone via SSH, falling back to remote flake"
-        HM_DIR="github:shedali/home-manager"
+        echo "  Cloning home-manager repo..." >&2
+        gh repo clone shedali/home-manager "$HM_DIR" >&2 \
+            && echo "  ✓ Cloned home-manager" >&2 \
+            || echo "  ⚠ Could not clone" >&2
     fi
+    echo "$TOKEN"
+') || true
+
+# If the clone/pull failed, fall back to fetching the flake directly. This needs
+# the token too, because an anonymous github: fetch of a private repo 404s.
+if [ ! -d "$HM_DIR/.git" ]; then
+    echo "  ⚠ Falling back to remote flake"
+    HM_DIR="github:shedali/home-manager"
 fi
 
 # ---------------------------------------------------------------------------
@@ -96,10 +117,16 @@ if [ "$PROFILE" = "chasevm" ] || [ "$PROFILE" = "chasehost" ]; then
     HM_PROFILE="franz-${PROFILE}"
 fi
 
+# When applying from the remote (private) flake, pass the token so nix can fetch it.
+HM_FLAGS=()
+if [ "$HM_DIR" = "github:shedali/home-manager" ] && [ -n "$GH_TOKEN" ]; then
+    HM_FLAGS=(--option access-tokens "github.com=$GH_TOKEN")
+fi
+
 if command -v home-manager &>/dev/null; then
-    home-manager switch --flake "$HM_DIR#$HM_PROFILE"
+    home-manager switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}"
 else
-    "$NIX" run home-manager -- switch --flake "$HM_DIR#$HM_PROFILE"
+    "$NIX" run home-manager -- switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}"
 fi
 echo "  ✓ home-manager applied"
 
