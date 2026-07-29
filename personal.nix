@@ -69,8 +69,8 @@ in
   # Personal Homebrew configuration
   homebrew = {
     enable = true;
-    onActivation.autoUpdate = true;
-    onActivation.upgrade = true;
+    onActivation.autoUpdate = false;
+    onActivation.upgrade = false;
     onActivation.cleanup = "zap";
 
     # Personal taps (nikitabobko/tap comes from shared.nix)
@@ -90,7 +90,6 @@ in
       "saulpw/vd"
       "sbdchd/skim"
       "turbot/tap"
-      "ubuntu/microk8s"
       "vitorgalvao/tiny-scripts"
       "wix/brew"
       "yulrizka/tap"
@@ -112,7 +111,6 @@ in
       # "syncthing"  # commented out — not needed on macbook
       "tinymist"
       "typst"
-      "ubuntu/microk8s/microk8s"
       "yt-dlp"
       "zeroclaw"
     ];
@@ -128,6 +126,8 @@ in
       "audio-hijack"
       "autodesk-fusion"
       "bambu-studio"
+      # "ngrok"       # broken cask: undefined method 'postflight_steps' (brew bug)
+      # "parallels"   # broken cask: undefined method 'uninstall_preflight_steps' (brew bug)
       "balenaetcher"
       "bibdesk"
       "busycontacts"
@@ -135,8 +135,8 @@ in
       "chatgpt"
       "chatgpt-atlas"
       "claude"
-      "codex-app"
       "cleanshot"
+      "codex-app"
       "cursor"
       "dash"
       "devonthink"
@@ -171,7 +171,6 @@ in
       "losslesscut"
       "minstaller"
       "neofinder"
-      "ngrok"
       "nordvpn"
       "notion-calendar"
       "notion"
@@ -179,7 +178,6 @@ in
       "opera@beta"
       "opencode-desktop"
       "orbstack"
-      "parallels"
       "path-finder"
       "pdf-expert"
       "piezo"

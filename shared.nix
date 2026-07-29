@@ -79,6 +79,10 @@
     };
   };
 
+  # Brew reads this file before every invocation. Prevents brew from auto-updating
+  # during darwin-rebuild activation, which breaks mas's package_manager_installed? check.
+  environment.etc."homebrew/brew.env".text = "HOMEBREW_NO_AUTO_UPDATE=1\n";
+
   # Shared Homebrew apps across all profiles
   homebrew = {
     taps = [
