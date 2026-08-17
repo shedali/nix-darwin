@@ -278,7 +278,8 @@
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
       "bluebubbles"
-      "claude-code"
+      # @latest tracks the fast release channel; plain `claude-code` lags it.
+      "claude-code@latest"
       "screens-connect"
       "openclaw"
       "utm"

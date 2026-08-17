@@ -135,6 +135,12 @@ in
       "chatgpt"
       "chatgpt-atlas"
       "claude"
+      # The CLI, not the desktop app above. `@latest` tracks the fast release
+      # channel — plain `claude-code` lags it (2.1.212 vs 2.1.220 when added).
+      # Deliberately NOT the nixpkgs package: Claude Code ships faster than
+      # nixpkgs lands it, and being current matters more here than
+      # reproducibility. Sole owner — see modules/packages.nix in home-manager.
+      "claude-code@latest"
       "cleanshot"
       "codex-app"
       "cursor"

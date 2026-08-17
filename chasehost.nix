@@ -74,6 +74,11 @@
       "chatgpt"
       "cleanshot"
       "claude"
+      # @latest tracks the fast release channel; plain `claude-code` lags it.
+      # The nixpkgs claude-code is excluded on chasevm because Netskope blocks
+      # npm; this cask fetches a native binary from claude.com instead, so it
+      # should pass — if activation fails here on the download, that is why.
+      "claude-code@latest"
       "codex-app"
       "warp"
       "devonthink"
