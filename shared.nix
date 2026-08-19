@@ -127,4 +127,38 @@
       "Things" = 904280696;
     };
   };
+
+  # Weekly Claude self-improvement pass: drains the #ai @agent backlog in Parkour and
+  # checks the other automations are still alive.
+  #
+  # Declared here rather than in home-manager because home-manager's activation on this
+  # machine has no launch-agent step at all -- agents declared in its modules/services.nix
+  # are silently never materialised. nix-darwin's launchd.user.agents demonstrably works
+  # (org.nixos.obsidian-sync exists), so this is the mechanism that actually runs.
+  #
+  # Not CronCreate: those jobs live only inside the Claude session that created them.
+  # Not a bare crontab: scheduled-tasks.sh went that way and was never installed at all.
+  launchd.user.agents.claude-improve = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/bin/bash"
+        "/Users/franz/.claude/scripts/claude-improve-run.sh"
+      ];
+      # Mondays 08:47 -- off the hour on purpose; nothing else needs this to be punctual.
+      StartCalendarInterval = [
+        {
+          Weekday = 1;
+          Hour = 8;
+          Minute = 47;
+        }
+      ];
+      RunAtLoad = false;
+      StandardOutPath = "/tmp/claude-improve.out.log";
+      StandardErrorPath = "/tmp/claude-improve.err.log";
+      EnvironmentVariables = {
+        PATH = "/Users/franz/.nix-profile/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin";
+        HOME = "/Users/franz";
+      };
+    };
+  };
 }
