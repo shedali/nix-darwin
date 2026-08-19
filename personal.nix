@@ -47,6 +47,29 @@ in
     };
   };
 
+  # Parkour offline-first daemon (specs/OFFLINE-CLI-DAEMON.md): a warm local
+  # Y.Doc for the CLI's primary room, replacing the historical per-invocation
+  # WebsocketProvider that pulled the whole ~240KB doc on every `bun run cli`
+  # call. `bun run cli daemon` reads PARKOUR_ROOM/PARKOUR_API_KEY/
+  # PARKOUR_SYNC_URL from the repo's own `.env` (bun auto-loads it from
+  # WorkingDirectory) — no room id or credential is hardcoded here.
+  launchd.user.agents.parkour-daemon = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/Users/franz/.nix-profile/bin/bun"
+        "run"
+        "cli"
+        "daemon"
+      ];
+      WorkingDirectory = "/Users/franz/dev/shedali/parkour";
+      KeepAlive = true;
+      RunAtLoad = true;
+      ThrottleInterval = 30;
+      StandardErrorPath = "/tmp/parkour-daemon.err.log";
+      StandardOutPath = "/tmp/parkour-daemon.out.log";
+    };
+  };
+
   # Tdarr distributed transcoding worker node (native binary for VideoToolbox GPU acceleration)
   launchd.user.agents.tdarr-node = {
     serviceConfig = {
