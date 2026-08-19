@@ -67,10 +67,22 @@
   };
 
   # Obsidian headless sync (continuous background sync for CLI/nvim editing)
+  #
+  # Runs lishid's `obsidian-headless` (bin: `ob`) via bunx — no global install needed,
+  # bunx resolves from its own cache and works with no network (verified), so this is
+  # safe at RunAtLoad before the network is up.
+  #
+  # Version is pinned deliberately: this is 0.0.x software, and an unattended upgrade
+  # that broke the CLI would silently stop syncing. Bump it consciously.
+  #
+  # Requires a one-time interactive setup (cannot be automated — needs account creds):
+  #   bunx obsidian-headless login
+  #   bunx obsidian-headless sync-setup --path /Users/franz/dev/shedali/knowledge
+  # Check with: bunx obsidian-headless sync-status --path /Users/franz/dev/shedali/knowledge
   launchd.user.agents.obsidian-sync = {
-    path = [ "/opt/homebrew/bin" "/usr/local/bin" "/usr/bin" "/bin" ];
+    path = [ "/Users/franz/.nix-profile/bin" "/opt/homebrew/bin" "/usr/local/bin" "/usr/bin" "/bin" ];
     serviceConfig = {
-      ProgramArguments = [ "/opt/homebrew/bin/ob" "sync" "--path" "/Users/franz/dev/shedali/knowledge" "--continuous" ];
+      ProgramArguments = [ "/Users/franz/.nix-profile/bin/bunx" "obsidian-headless@0.0.14" "sync" "--path" "/Users/franz/dev/shedali/knowledge" "--continuous" ];
       KeepAlive = true;
       RunAtLoad = true;
       EnvironmentVariables = { HOME = "/Users/franz"; };
