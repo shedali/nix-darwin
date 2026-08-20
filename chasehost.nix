@@ -95,6 +95,7 @@
       "rocket"
       "screens-connect"
       "slack"
+      "superwhisper"
       "telegram"
       "termius"
       "espanso"
