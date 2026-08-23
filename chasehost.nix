@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./shared.nix ];
+  imports = [ ./shared.nix ./modules/plezy.nix ];
 
   # Launch Ollama server automatically
   launchd.user.agents.ollama = {

@@ -3,7 +3,7 @@ let
   screenpipe = pkgs.callPackage ./packages/screenpipe.nix { };
 in
 {
-  imports = [ ./shared.nix ];
+  imports = [ ./shared.nix ./modules/plezy.nix ];
 
   environment.systemPackages = [ screenpipe ];
 

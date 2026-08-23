@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./shared.nix ];
+  imports = [ ./shared.nix ./modules/plezy.nix ];
 
   # MacBook Air Homebrew configuration - minimal portable setup
   homebrew = {
