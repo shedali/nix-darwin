@@ -185,6 +185,7 @@ in
       "gitbutler"
       "gitup-app"
       "google-drive"
+      "granola"
       "hammerspoon"
       "handbrakebatch"
       "hazel"
