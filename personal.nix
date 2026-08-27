@@ -92,8 +92,8 @@ in
   # Personal Homebrew configuration
   homebrew = {
     enable = true;
-    onActivation.autoUpdate = false;
-    onActivation.upgrade = false;
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
     onActivation.cleanup = "zap";
 
     # Personal taps (nikitabobko/tap comes from shared.nix)
@@ -185,7 +185,8 @@ in
       "gitbutler"
       "gitup-app"
       "google-drive"
-      "granola"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "granola"; greedy = true; }
       "hammerspoon"
       "handbrakebatch"
       "hazel"
@@ -209,7 +210,8 @@ in
       "opera@beta"
       "opencode-desktop"
       "orbstack"
-      "parallels"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "parallels"; greedy = true; }
       "path-finder"
       "pdf-expert"
       "piezo"
@@ -238,7 +240,8 @@ in
       "telegram"
       "termius"
       "thingsmacsandboxhelper"
-      "typeless"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "typeless"; greedy = true; }
       "utm"
       "visual-studio-code"
       "warp"

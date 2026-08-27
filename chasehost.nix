@@ -86,11 +86,14 @@
       "dropbox"
       "fantastical"
       "google-drive"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "granola"; greedy = true; }
       "hammerspoon"
       "keyboard-maestro"
       "opencode-desktop"
       "orbstack"
-      "parallels"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "parallels"; greedy = true; }
       "plexamp"
       "rocket"
       "screens-connect"

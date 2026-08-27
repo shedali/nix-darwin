@@ -12,6 +12,8 @@
     # masApps from shared.nix: Drafts, Spark, Things
     casks = [
       "claude"
+      # greedy: self-updating cask, plain upgrade skips it
+      { name = "granola"; greedy = true; }
     ];
 
     masApps = {
