@@ -124,9 +124,13 @@ if [ "$HM_DIR" = "github:shedali/home-manager" ] && [ -n "$GH_TOKEN" ]; then
 fi
 
 if command -v home-manager &>/dev/null; then
-    home-manager switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}"
+  # -b renames any pre-existing file home-manager wants to own instead of aborting.
+  # Without it a fresh machine dies on "Existing file '~/.config/gh/config.yml' would
+  # be clobbered" — gh writes that file the moment `gh auth status` runs in step 4,
+  # so the collision is self-inflicted and happens on every unattended bootstrap.
+    home-manager switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}" -b before-hm
 else
-    "$NIX" run home-manager -- switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}"
+    "$NIX" run home-manager -- switch --flake "$HM_DIR#$HM_PROFILE" "${HM_FLAGS[@]}" -b before-hm
 fi
 echo "  ✓ home-manager applied"
 
