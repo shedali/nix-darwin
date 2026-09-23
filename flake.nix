@@ -2,7 +2,7 @@
   description = "nix-darwin system configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/75690239f08f885ca9b0267580101f60d10fbe62";
+    nixpkgs.url = "github:NixOS/nixpkgs/6774f7bc253789b113a4f39285dc0fa100abeacc";
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
