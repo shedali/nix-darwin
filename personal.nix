@@ -158,12 +158,13 @@ in
       "chatgpt"
       "chatgpt-atlas"
       "claude"
-      # The CLI, not the desktop app above. `@latest` tracks the fast release
-      # channel — plain `claude-code` lags it (2.1.212 vs 2.1.220 when added).
-      # Deliberately NOT the nixpkgs package: Claude Code ships faster than
-      # nixpkgs lands it, and being current matters more here than
-      # reproducibility. Sole owner — see modules/packages.nix in home-manager.
-      "claude-code@latest"
+      # The Claude Code CLI is NOT declared here. It is the native install at
+      # ~/.local/bin/claude -> ~/.local/share/claude/versions/<v>, which tracks
+      # the `latest` release channel and updates itself. The `claude-code@latest`
+      # cask was removed because it shadowed that binary via /opt/homebrew/bin
+      # and only ever served what the `stable` channel serves, a manual
+      # `brew update && brew upgrade --cask --greedy` behind. Release freshness
+      # beats a declared install on this host; mini and chasehost keep the cask.
       "cleanshot"
       "codex-app"
       "cursor"
