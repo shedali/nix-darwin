@@ -90,19 +90,58 @@
   #   };
   # };
 
-  # Claude Code Telegram bot
+  # Claude Code Telegram bot (@shedali_claude_bot) via first-party Claude Code Channels.
+  #
+  # Replaces the third-party claude-code-telegram bot, which drove Claude through the Agent SDK:
+  # the category Anthropic has pulled from subscription billing before. This is a real
+  # interactive `claude` session, so it runs on the Max plan. Attach with `tmux a -t claude-telegram`.
+  #
+  # - Channels needs a TTY, hence tmux. The script blocks while the tmux session lives, so
+  #   KeepAlive restarts claude when it exits.
+  # - The token stays in ~/.claude-telegram/.env, the file the notification senders
+  #   (session-complete.sh, improve, research, postage-printer) already read, so a rotation
+  #   touches one file; the script copies it into the plugin's state dir at each start.
+  # - TELEGRAM_STATE_DIR is set explicitly: by default the plugin follows CLAUDE_CONFIG_DIR, which
+  #   here is the git-tracked home-manager repo, so access.json and the photo inbox would land in it.
+  # - The plugin is enabled at project scope in ~/claude-telegram only. Enabling it in the shared
+  #   settings.json would start a poller for this bot in every session on every machine.
+  # - Tool permission prompts relay to the paired Telegram DMs (reply "yes <code>").
   launchd.user.agents.claude-telegram = {
     path = [ "/opt/homebrew/bin" "/usr/local/bin" "/usr/bin" "/bin" "/Users/franz/.local/bin" "/Users/franz/.nix-profile/bin" ];
     serviceConfig = {
-      ProgramArguments = [ "/Users/franz/.local/bin/claude-telegram-bot" ];
+      ProgramArguments = [ (toString (pkgs.writeShellScript "claude-telegram-channel" ''
+        set -u
+        SESSION=claude-telegram
+        WORKDIR="$HOME/claude-telegram"
+        STATE="$HOME/.claude-telegram-channel"
+        CONFIG="$HOME/.config/home-manager/configs/claude"
+        TOKEN=$(/usr/bin/sed -n 's/^TELEGRAM_BOT_TOKEN=//p' "$HOME/.claude-telegram/.env" 2>/dev/null)
+        CLAUDE=$(command -v claude)
+        if [ -z "$TOKEN" ] || [ -z "$CLAUDE" ]; then
+          echo "$(date '+%F %T') missing token or claude binary; retrying" >&2
+          sleep 60; exit 1
+        fi
+        /bin/mkdir -p "$WORKDIR" "$STATE"
+        # Hand the token over in the plugin's own .env, not on a command line `ps` can read.
+        (umask 077; printf 'TELEGRAM_BOT_TOKEN=%s\n' "$TOKEN" > "$STATE/.env")
+        if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+          echo "$(date '+%F %T') starting $SESSION ($CLAUDE)"
+          tmux new-session -d -s "$SESSION" -c "$WORKDIR" \
+            -e TELEGRAM_STATE_DIR="$STATE" \
+            -e CLAUDE_CONFIG_DIR="$CONFIG" -e PATH="$PATH" \
+            "$CLAUDE" --channels plugin:telegram@claude-plugins-official
+        fi
+        while tmux has-session -t "$SESSION" 2>/dev/null; do sleep 30; done
+        echo "$(date '+%F %T') $SESSION ended"
+      '')) ];
       KeepAlive = true;
       RunAtLoad = true;
-      WorkingDirectory = "/Users/franz/.claude-telegram";
+      ThrottleInterval = 30;
       EnvironmentVariables = {
         HOME = "/Users/franz";
       };
-      StandardErrorPath = "/Users/franz/.claude-telegram/stderr.log";
-      StandardOutPath = "/Users/franz/.claude-telegram/stdout.log";
+      StandardErrorPath = "/Users/franz/Library/Logs/claude-telegram-channel.log";
+      StandardOutPath = "/Users/franz/Library/Logs/claude-telegram-channel.log";
     };
   };
 
