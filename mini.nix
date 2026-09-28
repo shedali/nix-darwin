@@ -121,6 +121,15 @@
           echo "$(date '+%F %T') missing token or claude binary; retrying" >&2
           sleep 60; exit 1
         fi
+        # Refuse to run unless claude is on the Max subscription. A /login that picks "Anthropic
+        # Console account" bills every Telegram message per token, and nothing else flags it.
+        AUTH=$(CLAUDE_CONFIG_DIR="$CONFIG" "$CLAUDE" auth status 2>/dev/null)
+        if ! printf '%s' "$AUTH" | grep -q '"authMethod": *"claude.ai"' \
+          || ! printf '%s' "$AUTH" | grep -q '"subscriptionType": *"max"'; then
+          echo "$(date '+%F %T') refusing to start: claude is not logged in on the Max subscription:" >&2
+          printf '%s\n' "$AUTH" | grep -E 'loggedIn|authMethod|subscriptionType' >&2
+          sleep 300; exit 1
+        fi
         /bin/mkdir -p "$WORKDIR" "$STATE"
         # Hand the token over in the plugin's own .env, not on a command line `ps` can read.
         (umask 077; printf 'TELEGRAM_BOT_TOKEN=%s\n' "$TOKEN" > "$STATE/.env")
