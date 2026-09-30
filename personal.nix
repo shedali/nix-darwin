@@ -126,6 +126,9 @@ in
       "appleboy/tap/codegpt"
       "mods"
       "ollama"
+      # Regular `opencode`, stable channel. `opencode2` is the separate beta CLI,
+      # installed by home-manager's opencodeCli activation (bun, @beta).
+      "opencode"
       "coreutils"
       "dash"
       "homeassistant-cli"
