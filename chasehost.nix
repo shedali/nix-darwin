@@ -56,6 +56,9 @@
       "cloudflared"
       "aichat"
       "ollama"
+      # Regular `opencode` (stable). chasehost skips the florence-flakes profile that
+      # chasevm uses; `opencode2` (beta) comes from home-manager's opencodeCli.
+      "opencode"
       "syncthing"
       "tinymist"
       "typst"
