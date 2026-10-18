@@ -102,11 +102,9 @@
     ];
     brews = [
       "flock"
-      "gh"
       "git-delta"
       "git-lfs"
       "llmfit"
-      "mas"
       "rtk"
       "worktrunk"
     ];

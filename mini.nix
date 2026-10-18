@@ -304,6 +304,7 @@
     ];
 
     brews = [
+      "mas"
       "agent-browser"
       "nullclaw"
       "ollama"

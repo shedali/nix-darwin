@@ -56,8 +56,7 @@ the hostname:
 | `personal` | Primary personal Mac |
 | `air` | MacBook Air |
 | `mini` | Mac mini server |
-| `chasehost` | Chase work host |
-| `chasevm` | Chase VM (standalone -- does not import `shared.nix`) |
+| `chase` | Chase work machine |
 
 Apply a profile straight from GitHub, no clone needed:
 

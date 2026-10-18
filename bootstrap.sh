@@ -4,9 +4,9 @@ set -e
 # Bootstrap script for nix-darwin + home-manager installation
 # Usage: curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- <profile>
 #
-# Profiles: personal | work | mini | air | chasevm | chasehost
+# Profiles: personal | work | mini | air | chase
 
-VALID_PROFILES="personal work mini air chasevm chasehost"
+VALID_PROFILES="personal work mini air chase"
 PROFILE="${1:-personal}"
 
 # Validate profile
@@ -113,8 +113,8 @@ echo ""
 echo "==> Applying home-manager config..."
 # Use profile-specific home-manager config if available
 HM_PROFILE="franz"
-if [ "$PROFILE" = "chasevm" ] || [ "$PROFILE" = "chasehost" ]; then
-    HM_PROFILE="franz-${PROFILE}"
+if [ "$PROFILE" = "chase" ]; then
+    HM_PROFILE="franz-chasevm"
 fi
 
 # When applying from the remote (private) flake, pass the token so nix can fetch it.

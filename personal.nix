@@ -119,6 +119,7 @@ in
     ];
 
     brews = [
+      "mas"
       "agent-browser"
       "acli"
       "cloudflared"

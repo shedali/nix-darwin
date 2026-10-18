@@ -8,9 +8,8 @@ This directory contains the nix-darwin configuration for managing macOS system s
 |---------|------|---------|
 | `#personal` | personal.nix | Full personal setup (imports shared.nix) |
 | `#mini` | mini.nix | Mac mini server (imports shared.nix) |
-| `#chasehost` | chasehost.nix | Chase work host machine |
+| `#chase` | chase.nix | Chase work machine |
 | `#air` | air.nix | MacBook Air portable setup |
-| `#chasevm` | chasevm.nix | Chase virtual machines |
 
 ### Personal Profile
 Full app suite for personal machine including:
@@ -30,18 +29,11 @@ Minimal server/utility setup for Mac mini including:
 - **Remote Access:** Tailscale (Mac App Store)
 - **Dock:** Ghostty only
 
-### Chase Host Profile
-Work machine with productivity apps for the Chase host macOS.
+### Chase Profile
+The single Chase work profile (imports `shared.nix`).
 
 ### Air Profile
 Minimal portable setup for MacBook Air.
-
-### Chase VM Profile
-Minimal work-focused setup for Chase virtual machines:
-- **Window Manager:** AeroSpace (auto-starts via launchd)
-- **Core Apps:** Ghostty, Visual Studio Code, Slack, Google Chrome
-- **Tools:** 1Password, Syncthing
-- **Dock:** Ghostty, Slack, Chrome
 
 ## Quick Reference
 
@@ -56,14 +48,11 @@ sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#personal
 # Mac mini
 sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#mini
 
-# Chase host
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#chasehost
+# Chase
+sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#chase
 
 # MacBook Air
 sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#air
-
-# Chase VM
-sudo darwin-rebuild switch --flake ~/dev/shedali/nix-darwin#chasevm
 ```
 
 ### View Changes Without Applying
@@ -88,8 +77,8 @@ One command that automatically handles everything:
 # Personal machine
 curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- personal
 
-# Chase VM
-curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- chasevm
+# Chase
+curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- chase
 
 # Mac mini
 curl -fsSL https://raw.githubusercontent.com/shedali/nix-darwin/main/bootstrap.sh | bash -s -- mini
@@ -178,9 +167,8 @@ killall AeroSpace
 ├── shared.nix         # Shared configuration (imported by personal, mini)
 ├── personal.nix       # Personal profile configuration
 ├── mini.nix           # Mac mini profile configuration
-├── chasehost.nix      # Chase host profile configuration
+├── chase.nix          # Chase profile configuration
 ├── air.nix            # MacBook Air profile configuration
-├── chasevm.nix        # Chase VM profile configuration
 └── CLAUDE.md          # This file
 ```
 

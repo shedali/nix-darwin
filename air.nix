@@ -10,6 +10,10 @@
 
     # Air-specific casks (shared.nix provides: 1password, aerospace, ghostty, google-chrome, obsidian, raycast)
     # masApps from shared.nix: Drafts, Spark, Things
+    brews = [
+      "mas"
+    ];
+
     casks = [
       "claude"
       # greedy: self-updating cask, plain upgrade skips it

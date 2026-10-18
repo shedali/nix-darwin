@@ -33,22 +33,6 @@
         "type": "github"
       }
     },
-    "manaflow-cmux-tap": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785744424,
-        "narHash": "sha256-Q3R/3rFAT84Lthm1jUI4BK/klno0IzrWun79c/RFO1I=",
-        "owner": "manaflow-ai",
-        "repo": "homebrew-cmux",
-        "rev": "2923c738081350f309068ff3120f7aeb00722126",
-        "type": "github"
-      },
-      "original": {
-        "owner": "manaflow-ai",
-        "repo": "homebrew-cmux",
-        "type": "github"
-      }
-    },
     "nikitabobko-tap": {
       "flake": false,
       "locked": {
@@ -122,7 +106,6 @@
     "root": {
       "inputs": {
         "atlassian-acli-tap": "atlassian-acli-tap",
-        "manaflow-cmux-tap": "manaflow-cmux-tap",
         "nikitabobko-tap": "nikitabobko-tap",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

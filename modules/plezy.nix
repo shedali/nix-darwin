@@ -1,5 +1,5 @@
 # Plezy, the third-party Plex client. Imported by the profiles that want it
-# (personal, chasehost, air) — deliberately not in shared.nix, which mini also
+# (personal, chase, air) — deliberately not in shared.nix, which mini also
 # imports and which has no use for a GUI media client.
 #
 # Lands in /Applications/Nix Apps rather than /Applications, like every other
