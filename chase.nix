@@ -38,7 +38,6 @@
   # Chase dock settings
   system.defaults.dock.persistent-apps = [
     "/Applications/Ghostty.app"
-    "/Applications/Island.app"
     "/Applications/Google Chrome.app"
   ];
 }
