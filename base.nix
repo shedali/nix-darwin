@@ -28,17 +28,7 @@
   # Platform
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  # Launch AeroSpace automatically (all profiles use AeroSpace)
-  launchd.user.agents.aerospace = {
-    path = [ "/usr/bin" "/usr/local/bin" ];
-    serviceConfig = {
-      ProgramArguments = [ "/Applications/AeroSpace.app/Contents/MacOS/AeroSpace" ];
-      KeepAlive = true;
-      RunAtLoad = true;
-      StandardErrorPath = "/tmp/aerospace.err.log";
-      StandardOutPath = "/tmp/aerospace.out.log";
-    };
-  };
+  # AeroSpace is not launched automatically; start it by hand.
 
   # Post-activation script
   system.activationScripts.postActivation.text = ''

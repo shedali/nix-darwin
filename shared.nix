@@ -93,7 +93,13 @@
 
   # Brew reads this file before every invocation. Prevents brew from auto-updating
   # during darwin-rebuild activation, which breaks mas's package_manager_installed? check.
-  environment.etc."homebrew/brew.env".text = "HOMEBREW_NO_AUTO_UPDATE=1\n";
+  # Homebrew deletes a tap's trust entries whenever the tap is re-registered, which
+  # nix-homebrew does on every rebuild, so brew cleanup fails with "untrusted tap".
+  # All taps are declared in nix, so the trust prompt adds nothing here.
+  environment.etc."homebrew/brew.env".text = ''
+    HOMEBREW_NO_AUTO_UPDATE=1
+    HOMEBREW_NO_REQUIRE_TAP_TRUST=1
+  '';
 
   # Shared Homebrew apps across all profiles
   homebrew = {
@@ -104,6 +110,7 @@
       "flock"
       "git-delta"
       "git-lfs"
+      "herdr"
       "llmfit"
       "rtk"
       "worktrunk"
