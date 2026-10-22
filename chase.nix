@@ -26,6 +26,7 @@
       "orbstack"
       "parallels"
       "slack"
+      "visual-studio-code"
       "losslesscut"
       "zoom"
     ];
